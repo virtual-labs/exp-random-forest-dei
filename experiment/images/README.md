@@ -1,2 +1,1 @@
-### This folder contains all the image files used in the experiment.
-(No images currently in this folder)
+### This folder contains images used in round 3 documentation.

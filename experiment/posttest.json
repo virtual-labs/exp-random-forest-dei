@@ -2,174 +2,38 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "Which technique is used to improve Random Forest stability?",
+      "question": "This is a Sample Question 1?",
       "answers": {
-        "a": "Pruning",
-        "b": "Normalization",
-        "c": "Standardization",
-        "d": "Bagging"
+        "a": "answer1",
+        "b": "answer2",
+        "c": "answer3",
+        "d": "answer4"
       },
       "explanations": {
-        "a": "Pruning applies to individual Decision Trees and does not address ensemble-level stability.",
-        "b": "Random Forest is scale-invariant, so normalization does not improve stability.",
-        "c": "Standardization has little effect on tree-based models.",
-        "d": "Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability."
+        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "b": "Explanation 2",
+        "c": "Explanation 2",
+        "d": "Explanation 2"
       },
-      "correctAnswer": "d",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "Advantage of Random Forest?",
-      "answers": {
-        "a": "Requires feature scaling",
-        "b": "Black-box model",
-        "c": "Easy to interpret",
-        "d": "High bias"
-      },
-      "explanations": {
-        "a": "Feature scaling is not required for Random Forest.",
-        "b": "Being a black-box is a disadvantage, not an advantage.",
-        "c": "Random Forest provides feature importance and decision paths, making it more interpretable than many ensemble models.",
-        "d": "Random Forest typically reduces bias compared to a single tree."
-      },
-      "correctAnswer": "c",
+      "correctAnswer": "a",
       "difficulty": "beginner"
     },
     {
-      "question": "What happens to bias and variance in Random Forest compared to a single tree?",
+      "question": "This is a Sample Question 2?",
       "answers": {
-        "a": "Bias increases, variance increases",
-        "b": "Bias decreases, variance decreases",
-        "c": "Bias increases, variance decreases",
-        "d": "Bias remains constant, variance increases"
+        "a": "answer1",
+        "b": "answer2",
+        "c": "answer3",
+        "d": "answer4"
       },
       "explanations": {
-        "a": "Random Forest is designed to reduce variance.",
-        "b": "Random Forest slightly reduces bias and significantly reduces variance.",
-        "c": "Bias does not increase in Random Forest.",
-        "d": "Variance is reduced, not increased."
-      },
-      "correctAnswer": "b",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "Which Random Forest parameter controls feature randomness at each split?",
-      "answers": {
-        "a": "n_estimators",
-        "b": "max_features",
-        "c": "min_samples_split",
-        "d": "max_depth"
-      },
-      "explanations": {
-        "a": "n_estimators controls number of trees.",
-        "b": "max_features controls how many features are randomly considered at each split.",
-        "c": "This controls node splitting, not feature randomness.",
-        "d": "max_depth controls tree depth."
-      },
-      "correctAnswer": "b",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "How does Random Forest handle noisy data compared to a single Decision Tree?",
-      "answers": {
-        "a": "It amplifies noise",
-        "b": "It ignores noise completely",
-        "c": "It is more robust to noise",
-        "d": "It removes noisy features automatically"
-      },
-      "explanations": {
-        "a": "Noise impact is reduced due to averaging.",
-        "b": "Noise still affects individual trees.",
-        "c": "Averaging predictions reduces the influence of noisy samples.",
-        "d": "Random Forest does not explicitly remove noise."
+        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "b": "Explanation 2",
+        "c": "Explanation 2",
+        "d": "Explanation 2"
       },
       "correctAnswer": "c",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "Which output aggregation method is used in Random Forest regression?",
-      "answers": {
-        "a": "Majority voting",
-        "b": "Median value",
-        "c": "Mean of predictions",
-        "d": "Gradient update"
-      },
-      "explanations": {
-        "a": "Majority voting is used in classification.",
-        "b": "Median is not the default method.",
-        "c": "Random Forest regression averages predictions from all trees.",
-        "d": "Gradient updates are used in boosting."
-      },
-      "correctAnswer": "c",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "Why is Random Forest considered computationally expensive?",
-      "answers": {
-        "a": "Uses backpropagation",
-        "b": "Trains many Decision Trees",
-        "c": "Requires feature scaling",
-        "d": "Uses complex mathematical optimization"
-      },
-      "explanations": {
-        "a": "Backpropagation is used in neural networks.",
-        "b": "Multiple trees increase memory and computation requirements.",
-        "c": "Feature scaling is not required.",
-        "d": "Tree-based models are rule-based."
-      },
-      "correctAnswer": "b",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "Which scenario best suits Random Forest usage?",
-      "answers": {
-        "a": "Very small datasets with linear patterns",
-        "b": "High-dimensional data with nonlinear relationships",
-        "c": "Unlabeled datasets",
-        "d": "Streaming real-time learning"
-      },
-      "explanations": {
-        "a": "Simpler models work better here.",
-        "b": "Random Forest handles high dimensionality and nonlinearity well.",
-        "c": "Random Forest requires labeled data.",
-        "d": "Traditional Random Forest is not designed for streaming."
-      },
-      "correctAnswer": "b",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "What information can Random Forest provide besides predictions?",
-      "answers": {
-        "a": "Gradient values",
-        "b": "Feature importance scores",
-        "c": "Cluster assignments",
-        "d": "Reinforcement rewards"
-      },
-      "explanations": {
-        "a": "Gradients are not computed.",
-        "b": "Random Forest estimates feature importance based on split contributions.",
-        "c": "Clustering is unsupervised.",
-        "d": "No reward mechanism exists."
-      },
-      "correctAnswer": "b",
       "difficulty": "beginner"
-    },
-    {
-      "question": "Why is Random Forest preferred over boosting in some cases?",
-      "answers": {
-        "a": "It focuses on hard samples only",
-        "b": "It is less sensitive to noise",
-        "c": "It uses gradient descent",
-        "d": "It requires fewer trees"
-      },
-      "explanations": {
-        "a": "This is a property of boosting.",
-        "b": "Boosting may overfit noisy data, while Random Forest is more stable.",
-        "c": "Gradient descent is not used.",
-        "d": "Tree count varies."
-      },
-      "correctAnswer": "b",
-      "difficulty": "intermediate"
     }
   ]
 }
