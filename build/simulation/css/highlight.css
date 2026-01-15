@@ -1,0 +1,22 @@
+/* Syntax Highlighting Styles */
+.keyword {
+    color: #e06c75; /* Red/Pink for keywords (import, from, def, return) */
+    font-weight: bold;
+}
+
+.string {
+    color: #98c379; /* Green for strings */
+}
+
+.number {
+    color: #d19a66; /* Orange for numbers */
+}
+
+.comment {
+    color: #5c6370; /* Grey for comments */
+    font-style: italic;
+}
+
+.function {
+    color: #61afef; /* Blue for function calls */
+}

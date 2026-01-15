@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Decision Tree Experiment - Temp</title>
+    <link rel="stylesheet" href="./css/main-temp.css">
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+    <!-- Classification Selector (Initial View) -->
+    <div class="classification-selector" id="classificationSelector">
+        <div class="selector-container">
+            <h1>Decision Trees</h1>
+            <p>Visualising and building trees, applying pruning, and analysing results</p>
+            <div class="selector-buttons">
+                <button class="selector-btn" onclick="selectClassificationType('binary')">
+                    <h2>Binary Classification</h2>
+                </button>
+                <button class="selector-btn" onclick="selectClassificationType('multiclass')">
+                    <h2>Multi-Class Classification</h2>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Training Section (Hidden Initially) -->
+    <div class="training-section" id="trainingSection" style="display: none;">
+        <div class="container">
+            <div class="main-layout">
+                <!-- SIDEBAR -->
+                <div class="sidebar">
+                    <div class="sidebar-header">
+                        <div class="corner-triangle-top-left"></div>
+                        <h2 class="sidebar-title">STEPS</h2>
+                    </div>
+                    <div class="steps-container" id="stepsContainer">
+                        <!-- Steps will be injected here by JS -->
+                    </div>
+                </div>
+
+                <!-- RIGHT CONTENT AREA -->
+                <div class="content-area">
+
+                    <!-- TOP PANE: Code Display -->
+                    <div class="pane top-pane">
+
+                        <div class="code-box-container">
+                            <div class="code-box">
+                                <pre id="codeDisplay">// Code will appear here</pre>
+                                <button id="runBtn" class="run-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BOTTOM PANE: Output Display -->
+                    <div class="pane bottom-pane">
+                        <div class="output-content" id="outputDisplay">
+                            <!-- Output will appear here -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Animation Section (Hidden Initially) -->
+    <div class="animation-section" id="animationSection" style="display: none;">
+        <!-- Header with Controls -->
+        <header class="app-header">
+            <div class="header-left">
+                <h1>Decision Tree Visualizer</h1>
+                <p>Interactive traversal animation</p>
+            </div>
+
+            <div class="header-controls">
+                <!-- Max Depth Selection -->
+                <div class="control-section">
+                    <label>Max Depth</label>
+                    <div class="button-group">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Impurity Criterion Selection -->
+                <div class="control-section">
+                    <label>Impurity Criterion</label>
+                    <div class="button-group">
+                        <button class="criterion-btn active" data-criterion="gini">Gini</button>
+                        <button class="criterion-btn" data-criterion="entropy">Entropy</button>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Test Sample Selection -->
+                <div class="control-section">
+                    <label>Test Sample</label>
+                    <div class="sample-buttons" id="sampleButtons">
+                        <!-- Generated by JS: 1-7 circular buttons -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <!-- Animation Speed -->
+                <div class="control-section">
+                    <label>Animation Speed</label>
+                    <input type="range" id="speedSlider" min="0.5" max="3" step="0.5" value="1" class="speed-slider">
+                </div>
+
+                <!-- Replay Button -->
+                <button class="replay-btn" id="replayBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Replay
+                </button>
+
+                <!-- Back to Training Button -->
+                <button class="back-btn" id="backBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Back
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Left Sidebar: Sample Features -->
+            <aside class="feature-sidebar" id="featureSidebar">
+                <h3>
+                    <span class="indicator"></span>
+                    Sample Features
+                </h3>
+                <div class="features-grid" id="featuresGrid">
+                    <!-- Generated by JS -->
+                </div>
+            </aside>
+
+            <!-- Center: Animation Area -->
+            <main class="animation-area" id="animationArea">
+                <div class="tree-container" id="treeContainer">
+                    <!-- Tree nodes and edges will be rendered here -->
+                </div>
+
+                <!-- Floating True Label Display -->
+                <div class="true-label-display" id="trueLabelDisplay">
+                    <h4>True Label</h4>
+                    <div class="label-value" id="trueLabelValue">-</div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- html2pdf.js library for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="js/tree_data_multiclass.js"></script>
+    <script src="js/tree_data_binary.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
