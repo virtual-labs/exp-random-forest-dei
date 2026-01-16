@@ -15,6 +15,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
 		rel="stylesheet">
+	<!-- jsPDF Library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 </head>
 
 <body>
@@ -197,18 +200,12 @@
 	<div class="rf-modal-overlay" id="rfModalOverlay">
 		<div class="rf-modal-container">
 			<header class="rf-modal-header">
-				<button class="rf-modal-back-btn" id="rfModalBackBtn">
-					<div class="rf-modal-back-icon">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2">
-							<path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-						</svg>
-					</div>
-					<div class="rf-modal-back-text">
-						<div class="rf-modal-back-label">Back to Forest</div>
-						<div class="rf-modal-back-title" id="rfModalTreeNum">Tree #1</div>
-					</div>
-				</button>
+
+
+				<div class="rf-modal-header-left">
+					<h3 id="rfModalTreeNum" style="margin: 0; font-size: 1.25rem; font-weight: 700; color: #334155;">
+						Tree #1</h3>
+				</div>
 
 				<div class="rf-modal-tabs">
 					<button class="rf-modal-tab active" data-tab="prediction">Prediction Path</button>
@@ -249,12 +246,6 @@
 								<path d="M20 12H4" />
 							</svg>
 						</button>
-						<button class="rf-visual-tree-control-btn" id="rfZoomReset">
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-								stroke-width="2">
-								<path d="M3 10h18M3 14h18" />
-							</svg>
-						</button>
 					</div>
 					<div class="rf-visual-tree-canvas" id="rfTreeCanvas"></div>
 				</div>
@@ -263,6 +254,7 @@
 	</div>
 
 	<!-- Scripts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 	<script src="js/rf_data_multiclass.js"></script>
 	<script src="js/rf_data_binary.js"></script>
 	<script src="js/rf_animator.js"></script>

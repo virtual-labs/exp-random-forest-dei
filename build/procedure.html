@@ -6,7 +6,7 @@
         'discipline': 'Test',
         'college': 'DLBG',
         'phase': 'Testing',
-        'expName': 'RANDOM FORESTS',
+        'expName': 'RANDOM FOREST',
         'expShortName': 'random-forest'
         }];
     
@@ -25,7 +25,7 @@
     
     	<meta name="experiment-short-name" content="random-forest">
     	<meta name="developer-institute" content="DLBG">
-    	<meta name="learning-unit" content="RANDOM FORESTS">
+    	<meta name="learning-unit" content="RANDOM FOREST">
     	<meta name="task-name" content="Procedure">
     
     <!-- For iPhone -->
@@ -94,7 +94,7 @@
             </div>      <div class="svc-rating-submit">
                 <rating-submit title="Rate" this="" experiment="">
                 </rating-submit>
-            </div>      <bug-report id="bug-report" title="[BUG REPORT] RANDOM FORESTS" page-type="text" context-info="{&quot;organisation&quot;:&quot;Virtual Labs&quot;,&quot;developer_institute&quot;:&quot;DLBG&quot;,&quot;expname&quot;:&quot;RANDOM FORESTS&quot;,&quot;labname&quot;:&quot;Virtual Lab&quot;,&quot;phase&quot;:&quot;Testing&quot;}" checkbox-json="{&quot;text&quot;:[&quot;Insufficient Content&quot;],&quot;video&quot;:[&quot;Insufficient Content&quot;],&quot;assesment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;assessment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;simulation&quot;:[&quot;Simulation Not Working&quot;,&quot;Incorrect Results/Observations&quot;,&quot;Insufficient/Incorrect Instructions&quot;],&quot;DEFAULT&quot;:[&quot;Page Not Loading&quot;,&quot;Content Not Visible&quot;,&quot;Incorrect Content&quot;]}" button_style="border: none; color: #fff; background-color: #288ec8; text-align: center; font-size: 1.05rem; border-radius: 1em;padding: 0.6em 1.2em; margin: 0 10px" position="override" custom_button_class="v-button"></bug-report>
+            </div>      <bug-report id="bug-report" title="[BUG REPORT] RANDOM FOREST" page-type="text" context-info="{&quot;organisation&quot;:&quot;Virtual Labs&quot;,&quot;developer_institute&quot;:&quot;DLBG&quot;,&quot;expname&quot;:&quot;RANDOM FOREST&quot;,&quot;labname&quot;:&quot;Virtual Lab&quot;,&quot;phase&quot;:&quot;Testing&quot;}" checkbox-json="{&quot;text&quot;:[&quot;Insufficient Content&quot;],&quot;video&quot;:[&quot;Insufficient Content&quot;],&quot;assesment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;assessment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;simulation&quot;:[&quot;Simulation Not Working&quot;,&quot;Incorrect Results/Observations&quot;,&quot;Insufficient/Incorrect Instructions&quot;],&quot;DEFAULT&quot;:[&quot;Page Not Loading&quot;,&quot;Content Not Visible&quot;,&quot;Incorrect Content&quot;]}" button_style="border: none; color: #fff; background-color: #288ec8; text-align: center; font-size: 1.05rem; border-radius: 1em;padding: 0.6em 1.2em; margin: 0 10px" position="override" custom_button_class="v-button"></bug-report>
           </div>
         </nav>
       </header>
@@ -351,45 +351,37 @@
                 </div>
           </div>            <div class="vlabs-page-content px-5 pb-4 flex-grow-1 markdown-body">
               <div class="text-center fix-spacing">
-                <h2 id="random-forests">Random Forests</h2>
+                <h2 id="random-forest">Random Forest</h2>
           
               </div>
               <h2 id="binary-classification">Binary Classification</h2>
           <p>The objective of this experiment is to classify bank customers into two categories—subscribed and not subscribed to a term deposit—based on a set of demographic, financial, and marketing campaign features. The input to the model consists of multiple independent variables describing customer characteristics and past interactions, while the output is a binary dependent variable indicating whether the customer subscribes to the term deposit or not.</p>
-          <ol>
-          <li><strong>Import Required Libraries</strong>: Import the essential Python libraries: <code>pandas</code> and <code>numpy</code>.</li>
-          <li><strong>Load the Dataset</strong>: Load <code>bank_marketing.csv</code>. The Bank Marketing dataset contains data from direct phone-based marketing campaigns by a Portuguese bank with about 45,211 customer records and 17 feature columns plus a binary target indicating whether the client subscribed to a term deposit (yes/no).</li>
-          <li><strong>Perform Data Analysis</strong>: Analyze the dataset using <code>head()</code>, <code>tail()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code>.</li>
-          <li><strong>Define Features X and Y</strong>:<ul>
-          <li><strong>Features (X)</strong>: age, job, marital, education, default, housing, loan, contact, month, day_of_week, duration, campaign, pdays, previous, poutcome, emp.var.rate, cons.price.idx, cons.conf.idx, euribor3m, nr.employed.</li>
-          <li><strong>Target (Y)</strong>: customer subscription behavior.</li>
-          </ul>
-          </li>
-          <li><strong>Split the Dataset</strong>: Split into 80% Training Set and 20% Testing Set.</li>
-          <li><strong>Train the Decision Tree Classifier</strong>: Initialize and configure the Decision Tree Classifier by setting important parameters such as the splitting criteria and the maximum depth (<code>max_depth</code>) of the tree. Train the classifier using the training dataset.</li>
-          <li><strong>Make Predictions on Test Data</strong>: Using the trained Decision Tree model, make predictions on the test dataset and compare with actual values to evaluate performance.</li>
-          </ol>
+          <p><strong>Step 1</strong>: <strong>Import Required Libraries</strong>: Import the essential Python libraries: <code>pandas</code> and <code>numpy</code>.</p>
+          <p><strong>Step 2</strong>: <strong>Load the Dataset</strong>: Load <code>bank_marketing.csv</code>. The Bank Marketing dataset contains data from direct phone-based marketing campaigns by a Portuguese bank with about 45,211 customer records and 17 feature columns plus a binary target indicating whether the client subscribed to a term deposit (yes/no).</p>
+          <p><strong>Step 3</strong>: <strong>Perform Data Analysis</strong>: Analyze the dataset using <code>head()</code>, <code>tail()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code>.</p>
+          <p><strong>Step 4</strong>: <strong>Define Features X and Y</strong>:
+              - <strong>Features (X)</strong>: age, job, marital, education, default, housing, loan, contact, month, day_of_week, duration, campaign, pdays, previous, poutcome, emp.var.rate, cons.price.idx, cons.conf.idx, euribor3m, nr.employed.
+              - <strong>Target (Y)</strong>: customer subscription behavior.</p>
+          <p><strong>Step 5</strong>: <strong>Split the Dataset</strong>: Split into 80% Training Set and 20% Testing Set.</p>
+          <p><strong>Step 6</strong>: <strong>Train the Decision Tree Classifier</strong>: Initialize and configure the Decision Tree Classifier by setting important parameters such as the splitting criteria and the maximum depth (<code>max_depth</code>) of the tree. Train the classifier using the training dataset.</p>
+          <p><strong>Step 7</strong>: <strong>Make Predictions on Test Data</strong>: Using the trained Decision Tree model, make predictions on the test dataset and compare with actual values to evaluate performance.</p>
           <hr>
           <h2 id="multi-class-classification">Multi-Class Classification</h2>
           <p>The objective of this experiment is to classify wheat seeds into three different varieties based on a set of geometric measurements. The input to the model consists of multiple independent variables representing seed features (such as area, perimeter, and kernel dimensions), while the output is a categorical dependent variable indicating the seed's variety (Class 1, 2, or 3).</p>
-          <ol>
-          <li><strong>Import Required Libraries</strong>: Import the essential Python libraries: <code>pandas</code> and <code>numpy</code>.</li>
-          <li><strong>Load the Dataset</strong>: Load <code>Seeds_Dataset.csv</code>. The Seeds dataset contains geometric measurements of 210 wheat seed samples belonging to three different varieties. It includes 7 numerical features related to seed shape and size, with one class label used for classification tasks.</li>
-          <li><strong>Perform Data Analysis</strong>: Analyze the dataset using <code>head()</code>, <code>tail()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code>.</li>
-          <li><strong>Define Features X and Y</strong>:<ul>
-          <li><strong>Features (X)</strong>: Area, Perimeter, Compactness, Length of Kernel, Width of Kernel, Asymmetry Coefficient, Length of Kernel Groove.</li>
-          <li><strong>Target (Y)</strong>: Class (1, 2, or 3).</li>
-          </ul>
-          </li>
-          <li><strong>Split the Dataset</strong>: Split into 80% Training Set and 20% Testing Set.</li>
-          <li><strong>Train the Random Forest Classifier</strong>: Initialize and configure the Random Forest Classifier by setting important parameters such as the splitting criteria and the number of trees in the forest. Train the classifier using the training dataset.</li>
-          <li><strong>Make Predictions on Test Data</strong>: Using the trained Random Forest model, predict outcomes for the test dataset by passing its features as input.</li>
-          <li><strong>Evaluate Model Performance</strong>: Evaluate the Random Forest model using the accuracy score to measure overall correctness, the confusion matrix to show true and false predictions, and the classification report to summarize precision, recall, and F1-score for each class.</li>
-          </ol>
+          <p><strong>Step 1</strong>: <strong>Import Required Libraries</strong>: Import the essential Python libraries: <code>pandas</code> and <code>numpy</code>.</p>
+          <p><strong>Step 2</strong>: <strong>Load the Dataset</strong>: Load <code>Seeds_Dataset.csv</code>. The Seeds dataset contains geometric measurements of 210 wheat seed samples belonging to three different varieties. It includes 7 numerical features related to seed shape and size, with one class label used for classification tasks.</p>
+          <p><strong>Step 3</strong>: <strong>Perform Data Analysis</strong>: Analyze the dataset using <code>head()</code>, <code>tail()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code>.</p>
+          <p><strong>Step 4</strong>: <strong>Define Features X and Y</strong>:
+              - <strong>Features (X)</strong>: Area, Perimeter, Compactness, Length of Kernel, Width of Kernel, Asymmetry Coefficient, Length of Kernel Groove.
+              - <strong>Target (Y)</strong>: Class (1, 2, or 3).</p>
+          <p><strong>Step 5</strong>: <strong>Split the Dataset</strong>: Split into 80% Training Set and 20% Testing Set.</p>
+          <p><strong>Step 6</strong>: <strong>Train the Random Forest Classifier</strong>: Initialize and configure the Random Forest Classifier by setting important parameters such as the splitting criteria and the number of trees in the forest. Train the classifier using the training dataset.</p>
+          <p><strong>Step 7</strong>: <strong>Make Predictions on Test Data</strong>: Using the trained Random Forest model, predict outcomes for the test dataset by passing its features as input.</p>
+          <p><strong>Step 8</strong>: <strong>Evaluate Model Performance</strong>: Evaluate the Random Forest model using the accuracy score to measure overall correctness, the confusion matrix to show true and false predictions, and the classification report to summarize precision, recall, and F1-score for each class.</p>
           
             </div>
           <div class="bug-report-mobile">
-              <bug-report id="bug-report" title="[BUG REPORT] RANDOM FORESTS" page-type="text" context-info="{&quot;organisation&quot;:&quot;Virtual Labs&quot;,&quot;developer_institute&quot;:&quot;DLBG&quot;,&quot;expname&quot;:&quot;RANDOM FORESTS&quot;,&quot;labname&quot;:&quot;Virtual Lab&quot;,&quot;phase&quot;:&quot;Testing&quot;}" checkbox-json="{&quot;text&quot;:[&quot;Insufficient Content&quot;],&quot;video&quot;:[&quot;Insufficient Content&quot;],&quot;assesment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;assessment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;simulation&quot;:[&quot;Simulation Not Working&quot;,&quot;Incorrect Results/Observations&quot;,&quot;Insufficient/Incorrect Instructions&quot;],&quot;DEFAULT&quot;:[&quot;Page Not Loading&quot;,&quot;Content Not Visible&quot;,&quot;Incorrect Content&quot;]}" position="override" button_style="
+              <bug-report id="bug-report" title="[BUG REPORT] RANDOM FOREST" page-type="text" context-info="{&quot;organisation&quot;:&quot;Virtual Labs&quot;,&quot;developer_institute&quot;:&quot;DLBG&quot;,&quot;expname&quot;:&quot;RANDOM FOREST&quot;,&quot;labname&quot;:&quot;Virtual Lab&quot;,&quot;phase&quot;:&quot;Testing&quot;}" checkbox-json="{&quot;text&quot;:[&quot;Insufficient Content&quot;],&quot;video&quot;:[&quot;Insufficient Content&quot;],&quot;assesment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;assessment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;simulation&quot;:[&quot;Simulation Not Working&quot;,&quot;Incorrect Results/Observations&quot;,&quot;Insufficient/Incorrect Instructions&quot;],&quot;DEFAULT&quot;:[&quot;Page Not Loading&quot;,&quot;Content Not Visible&quot;,&quot;Incorrect Content&quot;]}" position="override" button_style="
                           position: fixed; 
                           bottom: 20px;
                           right: 20px;

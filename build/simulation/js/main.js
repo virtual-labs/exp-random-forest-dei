@@ -234,9 +234,10 @@ le = LabelEncoder()
 for col in df_encoded.columns:
     if df_encoded[col].dtype == 'object':
         df_encoded[col] = le.fit_transform(df_encoded[col])
+        print(f"Encoded column: {col}")
 
-print("Categorical encoding completed")`,
-                output: '<div class="output-success">Categorical encoding completed</div>'
+print("\\nCategorical encoding completed")`,
+                output: `<div class="output-text">Encoded column: job<br>Encoded column: marital<br>Encoded column: education<br>Encoded column: default<br>Encoded column: housing<br>Encoded column: loan<br>Encoded column: contact<br>Encoded column: month<br>Encoded column: day_of_week<br>Encoded column: poutcome<br>Encoded column: y<br><br>Categorical encoding completed</div>`
             },
             {
                 comment: "Separate independent and dependent variables",
@@ -554,18 +555,21 @@ Name: Class, dtype: int64</div>`
                 code: `print("Statistical summary:")
 print(df.describe())`,
                 output: `<div class="output-text">Statistical summary:
-<table class="dataframe-table">
+<div class="table-wrapper"><div class="table-scroll-container"><table class="dataframe-table">
     <thead>
         <tr><th></th><th>Area</th><th>Perimeter</th><th>Compactness</th><th>Length_of_kernel</th><th>Width_of_kernel</th><th>Asymmetry_coefficient</th><th>Length_of_kernel_groove</th><th>Class</th></tr>
     </thead>
     <tbody>
-        <tr><th>count</th><td>210.0</td><td>210.0</td><td>210.0</td><td>210.0</td><td>210.0</td><td>210.0</td><td>210.0</td><td>210.0</td></tr>
-        <tr><th>mean</th><td>14.84</td><td>14.55</td><td>0.87</td><td>5.62</td><td>3.25</td><td>3.7</td><td>5.4</td><td>2.0</td></tr>
-        <tr><th>std</th><td>2.9</td><td>1.3</td><td>0.02</td><td>0.44</td><td>0.37</td><td>1.5</td><td>0.49</td><td>0.81</td></tr>
-        <tr><th>min</th><td>10.59</td><td>12.41</td><td>0.80</td><td>4.89</td><td>2.63</td><td>0.76</td><td>4.51</td><td>1.0</td></tr>
-        <tr><th>max</th><td>21.18</td><td>17.25</td><td>0.91</td><td>6.67</td><td>4.03</td><td>8.45</td><td>6.55</td><td>3.0</td></tr>
+        <tr><th>count</th><td>210.000000</td><td>210.000000</td><td>210.000000</td><td>210.000000</td><td>210.000000</td><td>210.000000</td><td>210.000000</td><td>210.000000</td></tr>
+        <tr><th>mean</th><td>14.847524</td><td>14.559286</td><td>0.870999</td><td>5.628533</td><td>3.258605</td><td>3.700201</td><td>5.408071</td><td>2.000000</td></tr>
+        <tr><th>std</th><td>2.909699</td><td>1.305959</td><td>0.023629</td><td>0.443063</td><td>0.377714</td><td>1.503557</td><td>0.491480</td><td>0.818448</td></tr>
+        <tr><th>min</th><td>10.590000</td><td>12.410000</td><td>0.808100</td><td>4.899000</td><td>2.630000</td><td>0.765100</td><td>4.519000</td><td>1.000000</td></tr>
+        <tr><th>25%</th><td>12.270000</td><td>13.450000</td><td>0.856900</td><td>5.262250</td><td>2.944000</td><td>2.561500</td><td>5.045000</td><td>1.000000</td></tr>
+        <tr><th>50%</th><td>14.355000</td><td>14.320000</td><td>0.873450</td><td>5.523500</td><td>3.237000</td><td>3.599000</td><td>5.223000</td><td>2.000000</td></tr>
+        <tr><th>75%</th><td>17.305000</td><td>15.715000</td><td>0.887775</td><td>5.979750</td><td>3.561750</td><td>4.768750</td><td>5.877000</td><td>3.000000</td></tr>
+        <tr><th>max</th><td>21.180000</td><td>17.250000</td><td>0.918300</td><td>6.675000</td><td>4.033000</td><td>8.456000</td><td>6.550000</td><td>3.000000</td></tr>
     </tbody>
-</table></div>`
+</table></div></div></div>`
             }
         ]
     },
@@ -954,7 +958,7 @@ function runStep(index) {
 
         // 4. Update Button State to Checkmark (Success)
         runBtn.classList.add('completed');
-        runBtn.style.backgroundColor = '#2e7d32'; // Green
+        runBtn.style.backgroundColor = '#A6CE63'; // Green
         runBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
 
         // Mark partial status if needed (optional here)
@@ -1052,13 +1056,21 @@ function showCompletionMessage() {
     runBtn.style.cursor = 'default';
 }
 
-// PDF Download - Download static PDF file
+// PDF Download (Simplified from LR/DT)
 function downloadTrainingAsPDF() {
-    const link = document.createElement('a');
-    link.href = './exp-random-forest.pdf';
-    link.download = 'Exp-Random-Forest.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+        // Download the pre-built PDF shipped with the experiment.
+        const pdfPath = './exp-random-forest.pdf';
+        const a = document.createElement('a');
+        a.href = pdfPath;
+        a.download = 'exp-random-forest.pdf';
+        // For browsers that require the element in DOM
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    } catch (e) {
+        console.error('Download Error:', e);
+        alert('Could not download the experiment PDF.');
+    }
 }
 // End of file
