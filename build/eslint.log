@@ -1,6 +1,6 @@
 
 C:\Users\3337r\OneDrive\Desktop\Vlab\exp-random-forest-dei\experiment\simulation\js\main.js
-  854:32  warning  'selectClassificationType' is not defined  no-undef
+  858:32  warning  'selectClassificationType' is not defined  no-undef
 
 C:\Users\3337r\OneDrive\Desktop\Vlab\exp-random-forest-dei\experiment\simulation\js\main_new.js
     5:5   warning  'CLASSIFICATION_TYPE' is assigned a value but never used  no-unused-vars

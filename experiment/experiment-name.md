@@ -1,1 +1,1 @@
-## Random Forests
+## Random Forest

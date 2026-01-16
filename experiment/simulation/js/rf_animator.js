@@ -784,7 +784,7 @@ const RF_ANIMATOR = {
             }
         });
         
-        // Active path edges (will animate)
+        // Active path edges (will animate) - stop at the edge of the final node
         let pathD = '';
         if (fullPath.length > 0) {
             const first = nodes.find(n => n.id === fullPath[0]);
@@ -795,7 +795,22 @@ const RF_ANIMATOR = {
                     const n2 = nodes.find(n => n.id === fullPath[i + 1]);
                     if (n1 && n2) {
                         const x1 = n1.x + offsetX, y1 = n1.y + offsetY;
-                        const x2 = n2.x + offsetX, y2 = n2.y + offsetY;
+                        let x2 = n2.x + offsetX, y2 = n2.y + offsetY;
+                        
+                        // If this is the last segment, stop at the edge of the target node
+                        if (i === fullPath.length - 2) {
+                            const nodeRadius = n2.is_leaf ? 20 : 16;
+                            // Calculate the direction and stop at the circle edge
+                            const dx = x2 - x1;
+                            const dy = y2 - y1;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            if (dist > 0) {
+                                // Stop at the edge of the circle (subtract radius from endpoint)
+                                x2 = x2 - (dx / dist) * nodeRadius;
+                                y2 = y2 - (dy / dist) * nodeRadius;
+                            }
+                        }
+                        
                         pathD += ` C${x1},${y1 + 40} ${x2},${y2 - 40} ${x2},${y2}`;
                     }
                 }
@@ -970,10 +985,6 @@ const RF_ANIMATOR = {
         };
         document.getElementById('rfZoomOut').onclick = () => {
             this.state.viewState.scale = Math.max(this.state.viewState.scale - 0.2, 0.2);
-            update();
-        };
-        document.getElementById('rfZoomReset').onclick = () => {
-            this.state.viewState = { x: 0, y: 0, scale: 1 };
             update();
         };
     },
