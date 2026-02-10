@@ -875,8 +875,30 @@ function renderSidebar() {
         </svg>
         Download Experiment
     `;
-    downloadBtn.onclick = downloadTrainingAsPDF;
+    
+    // Check if all steps are completed
+    const allCompleted = checkAllStepsCompleted();
+    if (allCompleted) {
+        downloadBtn.style.backgroundColor = "#F57C2A";
+        downloadBtn.style.color = "white";
+        downloadBtn.style.opacity = "1";
+        downloadBtn.style.cursor = "pointer";
+        downloadBtn.disabled = false;
+        downloadBtn.onclick = downloadTrainingAsPDF;
+    } else {
+        downloadBtn.style.backgroundColor = "#ccc";
+        downloadBtn.style.color = "#666";
+        downloadBtn.style.opacity = "0.7";
+        downloadBtn.style.cursor = "not-allowed";
+        downloadBtn.disabled = true;
+        downloadBtn.title = "Complete all steps to download the report";
+    }
     container.appendChild(downloadBtn);
+}
+
+// Function to check if all steps are completed
+function checkAllStepsCompleted() {
+    return STATE.stepsStatus.every(status => status.completed);
 }
 
 function loadStep(index, blockIdx = 0) {
