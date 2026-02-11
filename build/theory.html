@@ -349,11 +349,11 @@
                         </div>
                     </div>
                 </div>
-          </div>            <div class="vlabs-page-content px-5 pb-4 flex-grow-1 markdown-body">
-              <div class="text-center fix-spacing">
-                <h2 id="random-forest">Random Forest</h2>
+          </div>          <div class="vlabs-page-content px-5 pb-4 flex-grow-1 markdown-body">
+            <div class="text-center fix-spacing">
+              <h2 id="random-forest">Random Forest</h2>
           
-              </div>
+            </div>
               <p>A Random Forest is a supervised ensemble learning algorithm used for both classification and regression tasks. It builds multiple decision trees during training and combines their outputs to produce a more accurate and stable prediction. Instead of relying on a single tree, Random Forest aggregates the results of many trees to reduce overfitting and improve generalization.</p>
           <h3 id="1-main-components-of-a-random-forest">1. Main Components of a Random Forest</h3>
           <p>The main components of a Random Forest are:</p>
@@ -392,8 +392,53 @@
           <li><strong>Less Interpretability</strong>: The ensemble nature makes it difficult to interpret compared to a single decision tree.</li>
           <li><strong>Not Ideal for Real-Time Prediction</strong>: Due to multiple trees, prediction can be slower, making it less suitable for time-critical applications.</li>
           </ul>
+          <h3 id="7-algorithm">7. Algorithm</h3>
+          <ol>
+          <li><strong>Step 1:</strong> Set parameters:<ul>
+          <li>n = number of trees to build</li>
+          <li>m = number of features to consider at each split (usually √total_features)</li>
+          </ul>
+          </li>
+          <li><strong>Step 2:</strong> For each tree i = 1 to n:<ul>
+          <li><strong>Step 2a: Bootstrap Sampling</strong><ul>
+          <li>Randomly select N samples with replacement from training data</li>
+          <li>This creates a different dataset for each tree</li>
+          <li>About 37% of original data is left out (Out-of-Bag samples)</li>
+          </ul>
+          </li>
+          <li><strong>Step 2b: Build Decision Tree with Random Feature Selection</strong><ul>
+          <li>At each node:<ul>
+          <li>Randomly select m features from all features</li>
+          <li>Find the best split using <strong>ONLY</strong> these m features</li>
+          <li>Split the node</li>
+          </ul>
+          </li>
+          <li>Grow tree fully (no pruning)</li>
+          </ul>
+          </li>
+          </ul>
+          </li>
+          <li><strong>Step 3:</strong> Store all n trees</li>
+          <li><strong>Step 4:</strong> For prediction (<strong>Classification</strong>):<ul>
+          <li>Pass new sample through all trees</li>
+          <li>Each tree gives one vote</li>
+          <li>Final prediction = class with majority votes</li>
+          </ul>
+          </li>
+          <li><strong>Step 5:</strong> For prediction (<strong>Regression</strong>):<ul>
+          <li>Pass new sample through all trees</li>
+          <li>Each tree gives one numeric prediction</li>
+          <li>Final prediction is calculated as the average of all tree predictions</li>
+          </ul>
+          </li>
+          <li><strong>Step 6:</strong> Calculate Feature Importance:<ul>
+          <li>For each feature, sum up how much it reduced impurity across all trees</li>
+          <li>Normalize to get importance scores</li>
+          </ul>
+          </li>
+          </ol>
           
-            </div>
+          </div>
           <div class="bug-report-mobile">
               <bug-report id="bug-report" title="[BUG REPORT] RANDOM FOREST" page-type="text" context-info="{&quot;organisation&quot;:&quot;Virtual Labs&quot;,&quot;developer_institute&quot;:&quot;DLBG&quot;,&quot;expname&quot;:&quot;RANDOM FOREST&quot;,&quot;labname&quot;:&quot;Virtual Lab&quot;,&quot;phase&quot;:&quot;Testing&quot;}" checkbox-json="{&quot;text&quot;:[&quot;Insufficient Content&quot;],&quot;video&quot;:[&quot;Insufficient Content&quot;],&quot;assesment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;assessment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;simulation&quot;:[&quot;Simulation Not Working&quot;,&quot;Incorrect Results/Observations&quot;,&quot;Insufficient/Incorrect Instructions&quot;],&quot;DEFAULT&quot;:[&quot;Page Not Loading&quot;,&quot;Content Not Visible&quot;,&quot;Incorrect Content&quot;]}" position="override" button_style="
                           position: fixed; 
