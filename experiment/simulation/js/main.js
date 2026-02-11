@@ -1,6 +1,8 @@
 // ==========================================
 // GLOBAL STATE
 // ==========================================
+let hasCompletedOnce = sessionStorage.getItem('rf_completed') === 'true';
+
 let STATE = {
     currentStep: 0,
     currentBlockIndex: 0, // Track which block within a step is currently active
@@ -876,8 +878,8 @@ function renderSidebar() {
         Download Experiment
     `;
     
-    // Check if all steps are completed
-    const allCompleted = checkAllStepsCompleted();
+    // Check if all steps are completed (or were completed before a restart)
+    const allCompleted = checkAllStepsCompleted() || hasCompletedOnce;
     if (allCompleted) {
         downloadBtn.style.backgroundColor = "#F57C2A";
         downloadBtn.style.color = "white";
@@ -1041,6 +1043,8 @@ function runStep(index) {
 }
 
 function showCompletionMessage() {
+    hasCompletedOnce = true;
+    sessionStorage.setItem('rf_completed', 'true');
     const outputDisplay = document.getElementById('outputDisplay');
     const runBtn = document.getElementById('runBtn');
 
