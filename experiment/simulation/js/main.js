@@ -886,12 +886,16 @@ function renderSidebar() {
         downloadBtn.disabled = false;
         downloadBtn.onclick = downloadTrainingAsPDF;
     } else {
-        downloadBtn.style.backgroundColor = "#ccc";
-        downloadBtn.style.color = "#666";
-        downloadBtn.style.opacity = "0.7";
-        downloadBtn.style.cursor = "not-allowed";
-        downloadBtn.disabled = true;
-        downloadBtn.title = "Complete all steps to download the report";
+        downloadBtn.style.backgroundColor = "#f5f5f5";
+        downloadBtn.style.color = "#9e9e9e";
+        downloadBtn.style.opacity = "1";
+        downloadBtn.style.cursor = "default";
+        downloadBtn.style.border = "1px solid #e0e0e0";
+        downloadBtn.disabled = false;
+        downloadBtn.title = "Need to run the Experiment to download the pdf.";
+        downloadBtn.onclick = function () {
+            alert("Need to run the Experiment to download the pdf.");
+        };
     }
     container.appendChild(downloadBtn);
 }
@@ -1041,15 +1045,29 @@ function showCompletionMessage() {
     const runBtn = document.getElementById('runBtn');
 
     outputDisplay.innerHTML = `
+        <style>
+            @keyframes clap {
+                0%, 100% { transform: rotate(-15deg) scale(1); }
+                50% { transform: rotate(15deg) scale(1.1); }
+            }
+            .clapping-hands {
+                display: inline-block;
+                font-size: 2.5rem;
+                animation: clap 0.5s ease-in-out infinite;
+                margin: 0 5px;
+            }
+        </style>
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; min-height: 50vh; text-align: center; gap: 20px;">
+            <div style="margin-bottom: 10px;">
+                <span class="clapping-hands">👏</span>
+                <span class="clapping-hands" style="animation-delay: 0.15s;">👏</span>
+                <span class="clapping-hands" style="animation-delay: 0.3s;">👏</span>
+            </div>
             <div>
                 <h2 style="color: #3d8b8b; font-family: 'Courier New', monospace; font-size: 2rem; font-weight: bold; margin-bottom: 10px;">
-                    Experiment Completed! 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6b5b95" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 5px;">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
+                    Congratulations!
                 </h2>
-                <p style="color: #555; font-size: 1.1rem; font-family: 'Courier New', monospace;">You have completed random forest successfully!</p>
+                <p style="color: #555; font-size: 1.1rem; font-family: 'Courier New', monospace; max-width: 600px;">You have successfully completed the Random Forest experiment. You now understand how Random Forest performs classification using an ensemble of Decision Trees.</p>
             </div>
 
             <button onclick="RF_ANIMATOR.open(STATE.currentMode)" style="
