@@ -43,29 +43,29 @@ Once all trees are trained, predictions are made by combining the outputs of ind
 
 ### 7. Algorithm
 
-1. **Step 1:** Set parameters:
+- **Step 1:** Set parameters:
     - n = number of trees to build
     - m = number of features to consider at each split (usually √total_features)
-2. **Step 2:** For each tree i = 1 to n:
-    - **Step 2a: Bootstrap Sampling**
+- **Step 2:** For each tree i = 1 to n:
+    - **Step 2a:** Bootstrap Sampling
         - Randomly select N samples with replacement from training data
         - This creates a different dataset for each tree
         - About 37% of original data is left out (Out-of-Bag samples)
-    - **Step 2b: Build Decision Tree with Random Feature Selection**
+    - **Step 2b:** Build Decision Tree with Random Feature Selection
         - At each node:
             - Randomly select m features from all features
             - Find the best split using **ONLY** these m features
             - Split the node
         - Grow tree fully (no pruning)
-3. **Step 3:** Store all n trees
-4. **Step 4:** For prediction (**Classification**):
+- **Step 3:** Store all n trees
+- **Step 4:** For prediction (**Classification**):
     - Pass new sample through all trees
     - Each tree gives one vote
     - Final prediction = class with majority votes
-5. **Step 5:** For prediction (**Regression**):
+- **Step 5:** For prediction (**Regression**):
     - Pass new sample through all trees
     - Each tree gives one numeric prediction
     - Final prediction is calculated as the average of all tree predictions
-6. **Step 6:** Calculate Feature Importance:
+- **Step 6:** Calculate Feature Importance:
     - For each feature, sum up how much it reduced impurity across all trees
     - Normalize to get importance scores

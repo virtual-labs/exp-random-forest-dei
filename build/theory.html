@@ -393,20 +393,20 @@
           <li><strong>Not Ideal for Real-Time Prediction</strong>: Due to multiple trees, prediction can be slower, making it less suitable for time-critical applications.</li>
           </ul>
           <h3 id="7-algorithm">7. Algorithm</h3>
-          <ol>
+          <ul>
           <li><strong>Step 1:</strong> Set parameters:<ul>
           <li>n = number of trees to build</li>
           <li>m = number of features to consider at each split (usually √total_features)</li>
           </ul>
           </li>
           <li><strong>Step 2:</strong> For each tree i = 1 to n:<ul>
-          <li><strong>Step 2a: Bootstrap Sampling</strong><ul>
+          <li><strong>Step 2a:</strong> Bootstrap Sampling<ul>
           <li>Randomly select N samples with replacement from training data</li>
           <li>This creates a different dataset for each tree</li>
           <li>About 37% of original data is left out (Out-of-Bag samples)</li>
           </ul>
           </li>
-          <li><strong>Step 2b: Build Decision Tree with Random Feature Selection</strong><ul>
+          <li><strong>Step 2b:</strong> Build Decision Tree with Random Feature Selection<ul>
           <li>At each node:<ul>
           <li>Randomly select m features from all features</li>
           <li>Find the best split using <strong>ONLY</strong> these m features</li>
@@ -436,7 +436,7 @@
           <li>Normalize to get importance scores</li>
           </ul>
           </li>
-          </ol>
+          </ul>
           
           </div>
           <div class="bug-report-mobile">
