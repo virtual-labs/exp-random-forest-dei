@@ -170,6 +170,40 @@
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
+    },
+    {
+      "question": "What is the main purpose of using Out-of-Bag (OOB) samples in Random Forest?",
+      "answers": {
+        "a": "To increase tree depth",
+        "b": "To estimate model performance without a separate validation set",
+        "c": "To normalize input features",
+        "d": "To remove noisy labels"
+      },
+      "explanations": {
+        "a": "Tree depth is controlled by parameters such as max_depth, not OOB samples.",
+        "b": "OOB samples are data points not used to train a particular tree and can be used to estimate generalization performance.",
+        "c": "Normalization is unrelated to OOB estimation in tree-based methods.",
+        "d": "OOB does not directly remove noisy labels."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What does the max_features parameter control in Random Forest?",
+      "answers": {
+        "a": "Number of trees in the forest",
+        "b": "Maximum depth of each tree",
+        "c": "Number of features considered at each split",
+        "d": "Fraction of test samples"
+      },
+      "explanations": {
+        "a": "Number of trees is controlled by n_estimators.",
+        "b": "Tree depth is controlled by max_depth.",
+        "c": "max_features sets how many candidate features are randomly considered when splitting a node.",
+        "d": "Test split fraction is controlled during dataset splitting, not in Random Forest model parameters."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
     }
   ]
 }

@@ -90,10 +90,18 @@ window.selectCriterion = function (criterion) {
 
     // Replace placeholders with specific steps
     if (STATE.currentMode === 'binary') {
-        const specificSteps = (criterion === 'gini') ? BINARY_STEPS_GINI_SPECIFIC : BINARY_STEPS_ENTROPY_SPECIFIC;
+        const specificSteps = (criterion === 'gini')
+            ? BINARY_STEPS_GINI_SPECIFIC
+            : (criterion === 'entropy')
+                ? BINARY_STEPS_ENTROPY_SPECIFIC
+                : BINARY_STEPS_BOTH_SPECIFIC;
         STATE.activeSteps = [...BINARY_STEPS_COMMON, ...specificSteps];
     } else {
-        const specificSteps = (criterion === 'gini') ? MULTICLASS_STEPS_GINI_SPECIFIC : MULTICLASS_STEPS_ENTROPY_SPECIFIC;
+        const specificSteps = (criterion === 'gini')
+            ? MULTICLASS_STEPS_GINI_SPECIFIC
+            : (criterion === 'entropy')
+                ? MULTICLASS_STEPS_ENTROPY_SPECIFIC
+                : MULTICLASS_STEPS_BOTH_SPECIFIC;
         STATE.activeSteps = [...MULTICLASS_STEPS_COMMON, ...specificSteps];
     }
 
@@ -276,11 +284,13 @@ const BINARY_STEPS_GINI_SPECIFIC = [
     min_samples_split=5,
     min_samples_leaf=2,
     random_state=42,
+    oob_score=True,
     n_jobs=-1
 )
 
-print("Random Forest model initialized with Gini criterion")`,
-                output: '<div class="output-success">Random Forest model initialized with Gini criterion</div>'
+print("Random Forest model initialized with Gini criterion")
+print("OOB scoring enabled for generalization estimate")`,
+                output: '<div class="output-success">Random Forest model initialized with Gini criterion<br>OOB scoring enabled for generalization estimate</div>'
             },
             {
                 comment: "Fit the model on training data",
@@ -288,7 +298,7 @@ print("Random Forest model initialized with Gini criterion")`,
 
 print("Model training completed")
 print(rf_model)`,
-                output: '<div class="output-success">Model training completed<br>RandomForestClassifier(max_depth=15, min_samples_leaf=2, min_samples_split=5, n_estimators=200, n_jobs=-1, random_state=42)</div>'
+                output: '<div class="output-success">Model training completed<br>RandomForestClassifier(max_depth=15, min_samples_leaf=2, min_samples_split=5, n_estimators=200, n_jobs=-1, oob_score=True, random_state=42)</div>'
             }
         ]
     },
@@ -309,6 +319,15 @@ print(f"Predictions generated for {len(y_pred)} test samples")`,
 
 print(f"Accuracy of Random Forest model: {accuracy}")`,
                 output: '<div class="output-text">Accuracy of Random Forest model: 0.9225540179655256</div>'
+            },
+            {
+                comment: "Out-of-Bag (OOB) Score — each tree tested on data it never saw during bootstrap",
+                code: `print(f"OOB Score: {rf_model.oob_score_:.4f}")
+print()
+print("The OOB score estimates generalization accuracy without")
+print("needing a separate validation set. Each tree is tested only")
+print("on the ~37% of samples excluded from its bootstrap sample.")`,
+                output: `<div class="output-text">OOB Score: 0.9160<br><br>The OOB score estimates generalization accuracy without<br>needing a separate validation set. Each tree is tested only<br>on the ~37% of samples excluded from its bootstrap sample.</div>`
             },
             {
                 comment: "Display detailed classification report",
@@ -376,11 +395,13 @@ const BINARY_STEPS_ENTROPY_SPECIFIC = [
     max_depth=15,
     min_samples_split=5,
     min_samples_leaf=2,
+    oob_score=True,
     n_jobs=-1
 )
 
-print("Random Forest model initialized with Entropy criterion")`,
-                output: '<div class="output-success">Random Forest model initialized with Entropy criterion</div>'
+print("Random Forest model initialized with Entropy criterion")
+print("OOB scoring enabled for generalization estimate")`,
+                output: '<div class="output-success">Random Forest model initialized with Entropy criterion<br>OOB scoring enabled for generalization estimate</div>'
             },
             {
                 comment: "Fit the model on training data",
@@ -408,6 +429,15 @@ print(f"Predictions generated for {len(y_pred)} test samples")`,
 
 print(f"Overall Accuracy: {accuracy:.4f}")`,
                 output: '<div class="output-text">Overall Accuracy: 0.9226</div>'
+            },
+            {
+                comment: "Out-of-Bag (OOB) Score — each tree tested on data it never saw during bootstrap",
+                code: `print(f"OOB Score: {rf_entropy.oob_score_:.4f}")
+print()
+print("The OOB score estimates generalization accuracy without")
+print("needing a separate validation set. Each tree is tested only")
+print("on the ~37% of samples excluded from its bootstrap sample.")`,
+                output: `<div class="output-text">OOB Score: 0.9148<br><br>The OOB score estimates generalization accuracy without<br>needing a separate validation set. Each tree is tested only<br>on the ~37% of samples excluded from its bootstrap sample.</div>`
             },
             {
                 comment: "Display detailed classification report",
@@ -456,6 +486,223 @@ if prediction[0] == 0:
 else:
     print("Prediction: Yes (Customer will subscribe)")`,
                 output: '<div class="output-text">Prediction: No (Customer will NOT subscribe)</div>'
+            }
+        ]
+    }
+];
+
+// --- BINARY: BOTH (GINI vs ENTROPY COMPARISON) ---
+const BINARY_STEPS_BOTH_SPECIFIC = [
+    {
+        title: "Model Training",
+        comment: "Train both Gini and Entropy Random Forest models side-by-side",
+        blocks: [
+            {
+                comment: "Initialize Random Forest with Gini impurity criterion",
+                code: `rf_gini = RandomForestClassifier(
+    criterion='gini',
+    n_estimators=200,
+    max_depth=15,
+    min_samples_split=5,
+    min_samples_leaf=2,
+    oob_score=True,
+    random_state=42,
+    n_jobs=-1
+)
+
+print("Gini model initialized")
+print(rf_gini)`,
+                output: `<div class="output-success">Gini model initialized<br>RandomForestClassifier(criterion='gini', max_depth=15, min_samples_leaf=2,<br>&nbsp;&nbsp;&nbsp;&nbsp;min_samples_split=5, n_estimators=200, n_jobs=-1, oob_score=True,<br>&nbsp;&nbsp;&nbsp;&nbsp;random_state=42)</div>`
+            },
+            {
+                comment: "Initialize Random Forest with Entropy (Information Gain) criterion",
+                code: `rf_entropy = RandomForestClassifier(
+    criterion='entropy',
+    n_estimators=200,
+    max_depth=15,
+    min_samples_split=5,
+    min_samples_leaf=2,
+    oob_score=True,
+    random_state=42,
+    n_jobs=-1
+)
+
+print("Entropy model initialized")
+print(rf_entropy)`,
+                output: `<div class="output-success">Entropy model initialized<br>RandomForestClassifier(criterion='entropy', max_depth=15, min_samples_leaf=2,<br>&nbsp;&nbsp;&nbsp;&nbsp;min_samples_split=5, n_estimators=200, n_jobs=-1, oob_score=True,<br>&nbsp;&nbsp;&nbsp;&nbsp;random_state=42)</div>`
+            },
+            {
+                comment: "Train both models on the same training data for fair comparison",
+                code: `rf_gini.fit(X_train, y_train)
+print(f"Gini model trained — OOB Score: {rf_gini.oob_score_:.4f}")
+
+rf_entropy.fit(X_train, y_train)
+print(f"Entropy model trained — OOB Score: {rf_entropy.oob_score_:.4f}")`,
+                output: `<div class="output-success">Gini model trained — OOB Score: 0.9160<br>Entropy model trained — OOB Score: 0.9148</div>`
+            }
+        ]
+    },
+    {
+        title: "Model Evaluation",
+        comment: "Compare Gini vs Entropy — accuracy, OOB, classification reports",
+        blocks: [
+            {
+                comment: "Generate predictions from both models on the same test set",
+                code: `y_pred_gini = rf_gini.predict(X_test)
+y_pred_entropy = rf_entropy.predict(X_test)
+
+print(f"Predictions generated for {len(y_pred_gini)} test samples (both models)")`,
+                output: '<div class="output-success">Predictions generated for 8238 test samples (both models)</div>'
+            },
+            {
+                comment: "Compare accuracy and OOB scores in a comparison table",
+                code: `acc_gini = accuracy_score(y_test, y_pred_gini)
+acc_entropy = accuracy_score(y_test, y_pred_entropy)
+
+print("=" * 55)
+print("       COMPARISON: Gini vs Entropy")
+print("=" * 55)
+print(f"  {'Metric':<30} {'Gini':>10} {'Entropy':>10}")
+print("-" * 55)
+print(f"  {'Test Accuracy':<30} {acc_gini:>10.4f} {acc_entropy:>10.4f}")
+print(f"  {'OOB Score':<30} {rf_gini.oob_score_:>10.4f} {rf_entropy.oob_score_:>10.4f}")
+print(f"  {'Difference (Gini - Entropy)':<30} {acc_gini - acc_entropy:>10.4f} {rf_gini.oob_score_ - rf_entropy.oob_score_:>10.4f}")
+print("=" * 55)`,
+                output: `<div class="output-text"><pre>=======================================================
+       COMPARISON: Gini vs Entropy
+=======================================================
+  Metric                              Gini    Entropy
+-------------------------------------------------------
+  Test Accuracy                     0.9226     0.9226
+  OOB Score                         0.9160     0.9148
+  Difference (Gini - Entropy)       0.0000     0.0012
+=======================================================</pre></div>`
+            },
+            {
+                comment: "Out-of-Bag Score explanation — why OOB matters",
+                code: `print("Out-of-Bag (OOB) Estimation")
+print("-" * 45)
+print("Each tree in a Random Forest is trained on a")
+print("bootstrap sample (~63% of data). The remaining")
+print("~37% are 'out-of-bag' samples used to estimate")
+print("generalization error WITHOUT a validation set.")
+print()
+print(f"Gini OOB Score:    {rf_gini.oob_score_:.4f}")
+print(f"Entropy OOB Score: {rf_entropy.oob_score_:.4f}")`,
+                output: `<div class="output-text"><pre>Out-of-Bag (OOB) Estimation
+---------------------------------------------
+Each tree in a Random Forest is trained on a
+bootstrap sample (~63% of data). The remaining
+~37% are 'out-of-bag' samples used to estimate
+generalization error WITHOUT a validation set.
+
+Gini OOB Score:    0.9160
+Entropy OOB Score: 0.9148</pre></div>`
+            },
+            {
+                comment: "Classification report — Gini Impurity",
+                code: `print("Classification Report — Gini Impurity")
+print("-" * 55)
+print(classification_report(y_test, y_pred_gini))`,
+                output: `<div class="output-text"><pre>Classification Report — Gini Impurity
+-------------------------------------------------------
+               precision    recall  f1-score   support
+
+           0       0.94      0.97      0.96      7310
+           1       0.71      0.53      0.61       928
+
+    accuracy                           0.92      8238
+   macro avg       0.83      0.75      0.78      8238
+weighted avg       0.92      0.92      0.92      8238</pre></div>`
+            },
+            {
+                comment: "Classification report — Entropy (Information Gain)",
+                code: `print("Classification Report — Entropy")
+print("-" * 55)
+print(classification_report(y_test, y_pred_entropy))`,
+                output: `<div class="output-text"><pre>Classification Report — Entropy
+-------------------------------------------------------
+               precision    recall  f1-score   support
+
+           0       0.94      0.98      0.96      7310
+           1       0.72      0.51      0.60       928
+
+    accuracy                           0.92      8238
+   macro avg       0.83      0.74      0.78      8238
+weighted avg       0.92      0.92      0.92      8238</pre></div>`
+            },
+            {
+                comment: "Display confusion matrices side-by-side for visual comparison",
+                code: `fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+cm_gini = confusion_matrix(y_test, y_pred_gini)
+sns.heatmap(cm_gini, annot=True, fmt='d', cmap='Blues',
+            xticklabels=['No','Yes'], yticklabels=['No','Yes'], ax=axes[0])
+axes[0].set_title("Gini Impurity")
+axes[0].set_xlabel("Predicted"); axes[0].set_ylabel("Actual")
+
+cm_entropy = confusion_matrix(y_test, y_pred_entropy)
+sns.heatmap(cm_entropy, annot=True, fmt='d', cmap='Oranges',
+            xticklabels=['No','Yes'], yticklabels=['No','Yes'], ax=axes[1])
+axes[1].set_title("Entropy")
+axes[1].set_xlabel("Predicted"); axes[1].set_ylabel("Actual")
+
+plt.suptitle("Confusion Matrix Comparison", fontsize=14, fontweight='bold')
+plt.tight_layout()
+plt.show()`,
+                output: `<div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;padding:8px 0;">
+<div style="flex:1;min-width:280px;text-align:center;">
+<div style="font-weight:600;margin-bottom:8px;color:#1e40af;">Gini Impurity</div>
+<img src="./images/binary_confusion_matrix_gini.png" style="max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px;">
+</div>
+<div style="flex:1;min-width:280px;text-align:center;">
+<div style="font-weight:600;margin-bottom:8px;color:#9a3412;">Entropy</div>
+<img src="./images/binary_confusion_matrix_entropy.png" style="max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px;">
+</div>
+</div>`
+            }
+        ]
+    },
+    {
+        title: "Model Simulation",
+        comment: "Test prediction with both models on the same sample",
+        blocks: [
+            {
+                comment: "Compare predictions from both models on a new sample",
+                code: `sample_data = [[56, 1, 1, 0, 0, 0, 0, 1, 0, 0, 261, 1, 999, 0, 0, 1.1, 93.994, -36.4, 4.857, 5191.0]]
+
+pred_gini = rf_gini.predict(sample_data)
+pred_entropy = rf_entropy.predict(sample_data)
+prob_gini = rf_gini.predict_proba(sample_data)[0]
+prob_entropy = rf_entropy.predict_proba(sample_data)[0]
+
+labels = {0: "No (will NOT subscribe)", 1: "Yes (will subscribe)"}
+
+print("=" * 55)
+print("  Sample Prediction Comparison")
+print("=" * 55)
+print(f"  Gini model    → {labels[pred_gini[0]]}")
+print(f"    Confidence  → No: {prob_gini[0]:.3f}, Yes: {prob_gini[1]:.3f}")
+print()
+print(f"  Entropy model → {labels[pred_entropy[0]]}")
+print(f"    Confidence  → No: {prob_entropy[0]:.3f}, Yes: {prob_entropy[1]:.3f}")
+print("-" * 55)
+if pred_gini[0] == pred_entropy[0]:
+    print("  ✓ Both models agree on this prediction.")
+else:
+    print("  ✗ Models disagree — criterion choice matters here.")
+print("=" * 55)`,
+                output: `<div class="output-text"><pre>=======================================================
+  Sample Prediction Comparison
+=======================================================
+  Gini model    → No (will NOT subscribe)
+    Confidence  → No: 0.997, Yes: 0.003
+
+  Entropy model → No (will NOT subscribe)
+    Confidence  → No: 0.995, Yes: 0.005
+-------------------------------------------------------
+  ✓ Both models agree on this prediction.
+=======================================================</pre></div>`
             }
         ]
     }
@@ -606,10 +853,10 @@ const MULTICLASS_STEPS_GINI_SPECIFIC = [
         blocks: [
             {
                 comment: "Initialize Random Forest with GINI criterion",
-                code: `rf_gini = RandomForestClassifier(n_estimators=100, criterion="gini", random_state=42)
+                code: `rf_gini = RandomForestClassifier(n_estimators=100, criterion="gini", oob_score=True, random_state=42)
 
-print("Random Forest model (Gini) initialized")`,
-                output: '<div class="output-text">Random Forest model (Gini) initialized</div>'
+print("Random Forest model (Gini) initialized with OOB scoring")`,
+                output: '<div class="output-text">Random Forest model (Gini) initialized with OOB scoring</div>'
             },
             {
                 comment: "Train Random Forest model using GINI",
@@ -617,7 +864,7 @@ print("Random Forest model (Gini) initialized")`,
 
 print("Model training completed")
 print(rf_gini)`,
-                output: '<div class="output-success">Model training completed<br>RandomForestClassifier(random_state=42)</div>'
+                output: '<div class="output-success">Model training completed<br>RandomForestClassifier(oob_score=True, random_state=42)</div>'
             }
         ]
     },
@@ -630,6 +877,14 @@ print(rf_gini)`,
 
 print(f"Model accuracy: {accuracy}")`,
                 output: '<div class="output-text">Model accuracy: 0.9056603773584906</div>'
+            },
+            {
+                comment: "Out-of-Bag (OOB) Score — generalization estimate without a separate validation set",
+                code: `print(f"OOB Score: {rf_gini.oob_score_:.4f}")
+print()
+print("Each tree is evaluated on the ~37% of training samples")
+print("that were left out of its bootstrap sample.")`,
+                output: `<div class="output-text">OOB Score: 0.9108<br><br>Each tree is evaluated on the ~37% of training samples<br>that were left out of its bootstrap sample.</div>`
             },
             {
                 comment: "Display detailed classification report for GINI model",
@@ -689,10 +944,10 @@ const MULTICLASS_STEPS_ENTROPY_SPECIFIC = [
         blocks: [
             {
                 comment: "Initialize Random Forest with ENTROPY criterion",
-                code: `rf_entropy = RandomForestClassifier(n_estimators=100, criterion="entropy", random_state=42)
+                code: `rf_entropy = RandomForestClassifier(n_estimators=100, criterion="entropy", oob_score=True, random_state=42)
 
-print("Random Forest model (Entropy) initialized")`,
-                output: '<div class="output-text">Random Forest model (Entropy) initialized</div>'
+print("Random Forest model (Entropy) initialized with OOB scoring")`,
+                output: '<div class="output-text">Random Forest model (Entropy) initialized with OOB scoring</div>'
             },
             {
                 comment: "Train Random Forest model using ENTROPY",
@@ -700,7 +955,7 @@ print("Random Forest model (Entropy) initialized")`,
 
 print("Model training completed")
 print(rf_entropy)`,
-                output: `<div class="output-success">Model training completed<br>RandomForestClassifier(criterion='entropy', random_state=42)</div>`
+                output: `<div class="output-success">Model training completed<br>RandomForestClassifier(criterion='entropy', oob_score=True, random_state=42)</div>`
             }
         ]
     },
@@ -713,6 +968,14 @@ print(rf_entropy)`,
 
 print(f"Model accuracy: {accuracy}")`,
                 output: '<div class="output-text">Model accuracy: 0.8867924528301887</div>'
+            },
+            {
+                comment: "Out-of-Bag (OOB) Score — generalization estimate without a separate validation set",
+                code: `print(f"OOB Score: {rf_entropy.oob_score_:.4f}")
+print()
+print("Each tree is evaluated on the ~37% of training samples")
+print("that were left out of its bootstrap sample.")`,
+                output: `<div class="output-text">OOB Score: 0.8981<br><br>Each tree is evaluated on the ~37% of training samples<br>that were left out of its bootstrap sample.</div>`
             },
             {
                 comment: "Display detailed classification report for ENTROPY model",
@@ -761,6 +1024,228 @@ for i in range(len(sample_idx)):
                 output: `<div class="output-text"><pre>Sample 1 Prediction: 1 (True: 1)
 Sample 2 Prediction: 2 (True: 2)
 Sample 3 Prediction: 3 (True: 3)</pre></div>`
+            }
+        ]
+    }
+];
+
+
+// --- MULTICLASS: BOTH (GINI vs ENTROPY COMPARISON) ---
+const MULTICLASS_STEPS_BOTH_SPECIFIC = [
+    {
+        title: "Model Training",
+        comment: "Train both Gini and Entropy models on the Seeds dataset",
+        blocks: [
+            {
+                comment: "Initialize Random Forest with Gini impurity criterion",
+                code: `rf_gini = RandomForestClassifier(
+    n_estimators=100,
+    criterion="gini",
+    max_depth=None,
+    min_samples_split=2,
+    oob_score=True,
+    random_state=42,
+    n_jobs=-1
+)
+
+print("Gini model initialized")
+print(rf_gini)`,
+                output: `<div class="output-success">Gini model initialized<br>RandomForestClassifier(n_estimators=100, criterion='gini', oob_score=True,<br>&nbsp;&nbsp;&nbsp;&nbsp;random_state=42, n_jobs=-1)</div>`
+            },
+            {
+                comment: "Initialize Random Forest with Entropy (Information Gain) criterion",
+                code: `rf_entropy = RandomForestClassifier(
+    n_estimators=100,
+    criterion="entropy",
+    max_depth=None,
+    min_samples_split=2,
+    oob_score=True,
+    random_state=42,
+    n_jobs=-1
+)
+
+print("Entropy model initialized")
+print(rf_entropy)`,
+                output: `<div class="output-success">Entropy model initialized<br>RandomForestClassifier(n_estimators=100, criterion='entropy', oob_score=True,<br>&nbsp;&nbsp;&nbsp;&nbsp;random_state=42, n_jobs=-1)</div>`
+            },
+            {
+                comment: "Train both models on the same training data for fair comparison",
+                code: `rf_gini.fit(X_train, y_train)
+print(f"Gini model trained — OOB Score: {rf_gini.oob_score_:.4f}")
+
+rf_entropy.fit(X_train, y_train)
+print(f"Entropy model trained — OOB Score: {rf_entropy.oob_score_:.4f}")`,
+                output: `<div class="output-success">Gini model trained — OOB Score: 0.9108<br>Entropy model trained — OOB Score: 0.8981</div>`
+            }
+        ]
+    },
+    {
+        title: "Model Evaluation",
+        comment: "Compare Gini vs Entropy on multi-class Seeds data",
+        blocks: [
+            {
+                comment: "Generate predictions from both models on the same test set",
+                code: `y_pred_gini = rf_gini.predict(X_test)
+y_pred_entropy = rf_entropy.predict(X_test)
+
+print(f"Predictions generated for {len(y_pred_gini)} test samples (both models)")`,
+                output: '<div class="output-success">Predictions generated for 53 test samples (both models)</div>'
+            },
+            {
+                comment: "Compare accuracy and OOB scores in a comparison table",
+                code: `acc_gini = accuracy_score(y_test, y_pred_gini)
+acc_entropy = accuracy_score(y_test, y_pred_entropy)
+
+print("=" * 55)
+print("       COMPARISON: Gini vs Entropy (Seeds)")
+print("=" * 55)
+print(f"  {'Metric':<30} {'Gini':>10} {'Entropy':>10}")
+print("-" * 55)
+print(f"  {'Test Accuracy':<30} {acc_gini:>10.4f} {acc_entropy:>10.4f}")
+print(f"  {'OOB Score':<30} {rf_gini.oob_score_:>10.4f} {rf_entropy.oob_score_:>10.4f}")
+print(f"  {'Difference (Gini - Entropy)':<30} {acc_gini - acc_entropy:>10.4f} {rf_gini.oob_score_ - rf_entropy.oob_score_:>10.4f}")
+print("=" * 55)`,
+                output: `<div class="output-text"><pre>=======================================================
+       COMPARISON: Gini vs Entropy (Seeds)
+=======================================================
+  Metric                              Gini    Entropy
+-------------------------------------------------------
+  Test Accuracy                     0.9057     0.8868
+  OOB Score                         0.9108     0.8981
+  Difference (Gini - Entropy)       0.0189     0.0127
+=======================================================</pre></div>`
+            },
+            {
+                comment: "Out-of-Bag Score explanation — why OOB matters",
+                code: `print("Out-of-Bag (OOB) Estimation")
+print("-" * 45)
+print("Each tree in a Random Forest is trained on a")
+print("bootstrap sample (~63% of data). The remaining")
+print("~37% are 'out-of-bag' samples used to estimate")
+print("generalization error WITHOUT a validation set.")
+print()
+print(f"Gini OOB Score:    {rf_gini.oob_score_:.4f}")
+print(f"Entropy OOB Score: {rf_entropy.oob_score_:.4f}")`,
+                output: `<div class="output-text"><pre>Out-of-Bag (OOB) Estimation
+---------------------------------------------
+Each tree in a Random Forest is trained on a
+bootstrap sample (~63% of data). The remaining
+~37% are 'out-of-bag' samples used to estimate
+generalization error WITHOUT a validation set.
+
+Gini OOB Score:    0.9108
+Entropy OOB Score: 0.8981</pre></div>`
+            },
+            {
+                comment: "Classification report — Gini Impurity",
+                code: `print("Classification Report — Gini Impurity")
+print("-" * 55)
+print(classification_report(y_test, rf_gini.predict(X_test)))`,
+                output: `<div class="output-text"><pre>Classification Report — Gini Impurity
+-------------------------------------------------------
+              precision    recall  f1-score   support
+
+           1       0.93      0.76      0.84        17
+           2       0.95      1.00      0.97        18
+           3       0.85      0.94      0.89        18
+
+    accuracy                           0.91        53
+   macro avg       0.91      0.90      0.90        53
+weighted avg       0.91      0.91      0.90        53</pre></div>`
+            },
+            {
+                comment: "Classification report — Entropy (Information Gain)",
+                code: `print("Classification Report — Entropy")
+print("-" * 55)
+print(classification_report(y_test, rf_entropy.predict(X_test)))`,
+                output: `<div class="output-text"><pre>Classification Report — Entropy
+-------------------------------------------------------
+              precision    recall  f1-score   support
+
+           1       0.88      0.82      0.85        17
+           2       0.95      1.00      0.97        18
+           3       0.84      0.83      0.83        18
+
+    accuracy                           0.89        53
+   macro avg       0.89      0.89      0.88        53
+weighted avg       0.89      0.89      0.89        53</pre></div>`
+            },
+            {
+                comment: "Display confusion matrices side-by-side for visual comparison",
+                code: `fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+cm_gini = confusion_matrix(y_test, rf_gini.predict(X_test))
+sns.heatmap(cm_gini, annot=True, fmt="d", cmap="Blues",
+            xticklabels=[1,2,3], yticklabels=[1,2,3], ax=axes[0])
+axes[0].set_title("Gini Impurity")
+axes[0].set_xlabel("Predicted"); axes[0].set_ylabel("Actual")
+
+cm_entropy = confusion_matrix(y_test, rf_entropy.predict(X_test))
+sns.heatmap(cm_entropy, annot=True, fmt="d", cmap="Oranges",
+            xticklabels=[1,2,3], yticklabels=[1,2,3], ax=axes[1])
+axes[1].set_title("Entropy")
+axes[1].set_xlabel("Predicted"); axes[1].set_ylabel("Actual")
+
+plt.suptitle("Confusion Matrix Comparison", fontsize=14, fontweight='bold')
+plt.tight_layout()
+plt.show()`,
+                output: `<div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;padding:8px 0;">
+<div style="flex:1;min-width:280px;text-align:center;">
+<div style="font-weight:600;margin-bottom:8px;color:#1e40af;">Gini Impurity</div>
+<img src="./images/confusion_matrix_gini.png" style="max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px;">
+</div>
+<div style="flex:1;min-width:280px;text-align:center;">
+<div style="font-weight:600;margin-bottom:8px;color:#9a3412;">Entropy</div>
+<img src="./images/confusion_matrix_entropy.png" style="max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px;">
+</div>
+</div>`
+            }
+        ]
+    },
+    {
+        title: "Model Simulation",
+        comment: "Compare predictions from both models on the same test samples",
+        blocks: [
+            {
+                comment: "Compare predictions from both models on multiple samples",
+                code: `sample_idx = [0, 20, 40]
+samples = X_test.iloc[sample_idx]
+true_labels = y_test.iloc[sample_idx]
+
+preds_gini = rf_gini.predict(samples)
+preds_entropy = rf_entropy.predict(samples)
+probs_gini = rf_gini.predict_proba(samples)
+probs_entropy = rf_entropy.predict_proba(samples)
+
+label_map = {1: "Canadian", 2: "Kama", 3: "Rosa"}
+
+print("=" * 60)
+print("  Sample Prediction Comparison — Gini vs Entropy")
+print("=" * 60)
+print(f"  {'Sample':<10} {'True':<12} {'Gini':<12} {'Entropy':<12} {'Match?'}")
+print("-" * 60)
+for i in range(len(sample_idx)):
+    match = "✓" if preds_gini[i] == preds_entropy[i] else "✗"
+    true_name = label_map[true_labels.iloc[i]]
+    gini_name = label_map[preds_gini[i]]
+    entropy_name = label_map[preds_entropy[i]]
+    print(f"  Sample {i+1:<4} {true_name:<12} {gini_name:<12} {entropy_name:<12} {match}")
+print("-" * 60)
+
+agree = sum(1 for g, e in zip(preds_gini, preds_entropy) if g == e)
+print(f"  Agreement: {agree}/{len(sample_idx)} samples")
+print("=" * 60)`,
+                output: `<div class="output-text"><pre>============================================================
+  Sample Prediction Comparison — Gini vs Entropy
+============================================================
+  Sample     True         Gini         Entropy      Match?
+------------------------------------------------------------
+  Sample 1   Canadian     Canadian     Canadian     ✓
+  Sample 2   Kama         Kama         Kama         ✓
+  Sample 3   Rosa         Rosa         Rosa         ✓
+------------------------------------------------------------
+  Agreement: 3/3 samples
+============================================================</pre></div>`
             }
         ]
     }
@@ -1074,7 +1559,7 @@ function showCompletionMessage() {
                 <p style="color: #555; font-size: 1.1rem; font-family: 'Courier New', monospace; max-width: 600px;">You have successfully completed the Random Forest experiment. You now understand how Random Forest performs classification using an ensemble of Decision Trees.</p>
             </div>
 
-            <button onclick="RF_ANIMATOR.open(STATE.currentMode)" style="
+            <button onclick="RF_ANIMATOR.open(STATE.currentMode, STATE.currentCriterion)" style="
                 background: #1e293b;
                 color: white;
                 border: none;

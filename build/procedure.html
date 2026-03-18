@@ -354,30 +354,107 @@
               <h2 id="random-forest">Random Forest</h2>
           
             </div>
-              <h2 id="binary-classification">Binary Classification</h2>
-          <p>The objective of this experiment is to classify bank customers into two categories—subscribed and not subscribed to a term deposit—based on a set of demographic, financial, and marketing campaign features. The input to the model consists of multiple independent variables describing customer characteristics and past interactions, while the output is a binary dependent variable indicating whether the customer subscribes to the term deposit or not.</p>
-          <p><strong>Step 1</strong>: <strong>Import Required Libraries</strong>: Import the essential Python libraries: <code>pandas</code> and <code>numpy</code>.</p>
-          <p><strong>Step 2</strong>: <strong>Load the Dataset</strong>: Load <code>bank_marketing.csv</code>. The Bank Marketing dataset contains data from direct phone-based marketing campaigns by a Portuguese bank with about 45,211 customer records and 17 feature columns plus a binary target indicating whether the client subscribed to a term deposit (yes/no).</p>
-          <p><strong>Step 3</strong>: <strong>Perform Data Analysis</strong>: Analyze the dataset using <code>head()</code>, <code>tail()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code>.</p>
-          <p><strong>Step 4</strong>: <strong>Define Features X and Y</strong>:
-              - <strong>Features (X)</strong>: age, job, marital, education, default, housing, loan, contact, month, day_of_week, duration, campaign, pdays, previous, poutcome, emp.var.rate, cons.price.idx, cons.conf.idx, euribor3m, nr.employed.
-              - <strong>Target (Y)</strong>: customer subscription behavior.</p>
-          <p><strong>Step 5</strong>: <strong>Split the Dataset</strong>: Split into 80% Training Set and 20% Testing Set.</p>
-          <p><strong>Step 6</strong>: <strong>Train the Decision Tree Classifier</strong>: Initialize and configure the Decision Tree Classifier by setting important parameters such as the splitting criteria and the maximum depth (<code>max_depth</code>) of the tree. Train the classifier using the training dataset.</p>
-          <p><strong>Step 7</strong>: <strong>Make Predictions on Test Data</strong>: Using the trained Decision Tree model, make predictions on the test dataset and compare with actual values to evaluate performance.</p>
+              <h2 id="part-1-binary-classification-bank-marketing-dataset">Part 1: Binary Classification (Bank Marketing Dataset)</h2>
+          <p>The objective of this part is to classify bank customers into two categories (subscribed / not subscribed to a term deposit) using a Random Forest classifier, compare its performance against a single Decision Tree, and explore how key hyperparameters affect accuracy and generalisation.</p>
+          <p><strong>Step 1:</strong> Import the required libraries: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>, <code>seaborn</code>, and the relevant modules from <code>sklearn</code> (tree, ensemble, model_selection, metrics).</p>
+          <p><strong>Step 2:</strong> Load the Bank Marketing dataset (<code>bank_marketing.csv</code>). The dataset contains approximately 45,211 records from direct phone-based marketing campaigns by a Portuguese bank. It includes 17 feature columns describing customer demographics, financial status, and campaign details, along with a binary target variable indicating subscription outcome (yes/no).</p>
+          <p><strong>Step 3:</strong> Perform Exploratory Data Analysis:</p>
+          <ul>
+          <li>Use <code>head()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code> to understand the structure and quality of the data.</li>
+          <li>Check the class distribution of the target variable using <code>value_counts()</code> to identify any class imbalance.</li>
+          </ul>
+          <p><strong>Step 4:</strong> Define Features and Target:</p>
+          <ul>
+          <li><strong>Features (X):</strong> age, job, marital, education, default, housing, loan, contact, month, day_of_week, duration, campaign, pdays, previous, poutcome, emp.var.rate, cons.price.idx, cons.conf.idx, euribor3m, nr.employed.</li>
+          <li><strong>Target (Y):</strong> subscription outcome (yes / no).</li>
+          <li>Encode categorical features using <code>LabelEncoder</code> or <code>pd.get_dummies()</code>.</li>
+          </ul>
+          <p><strong>Step 5:</strong> Split the dataset into 80% Training Set and 20% Testing Set using <code>train_test_split()</code> with a fixed <code>random_state</code> for reproducibility.</p>
+          <p><strong>Step 6:</strong> Train a Single Decision Tree as Baseline:</p>
+          <ul>
+          <li>Initialize a <code>DecisionTreeClassifier</code> with <code>max_depth=5</code> and <code>criterion='gini'</code>.</li>
+          <li>Fit on the training data and record its test accuracy. This serves as a baseline to compare against the Random Forest.</li>
+          </ul>
+          <p><strong>Step 7:</strong> Train a Random Forest Classifier:</p>
+          <ul>
+          <li>Initialize <code>RandomForestClassifier</code> with <code>n_estimators=100</code>, <code>criterion='gini'</code>, and <code>random_state=42</code>.</li>
+          <li>Fit on the training data and record test accuracy.</li>
+          <li>Compare the Random Forest accuracy with the single Decision Tree from Step 6 to observe the ensemble improvement.</li>
+          </ul>
+          <p><strong>Step 8:</strong> Hyperparameter Exploration:</p>
+          <ul>
+          <li><strong>Vary <code>n_estimators</code></strong> (e.g., 10, 50, 100, 200, 500): Train a Random Forest for each value, record the test accuracy, and plot accuracy vs. number of trees to observe diminishing returns.</li>
+          <li><strong>Vary <code>max_depth</code></strong> (e.g., 3, 5, 10, 20, None): Observe the trade-off between underfitting and overfitting.</li>
+          <li><strong>Vary <code>max_features</code></strong> (e.g., 'sqrt', 'log2', 0.5, 1.0): Observe how feature randomness affects performance and tree diversity.</li>
+          </ul>
+          <p><strong>Step 9:</strong> OOB Score Analysis:</p>
+          <ul>
+          <li>Train a <code>RandomForestClassifier</code> with <code>oob_score=True</code> and access <code>oob_score_</code> after fitting.</li>
+          <li>Compare the OOB score with the test set accuracy to verify that OOB provides a reliable estimate of generalisation without a separate validation set.</li>
+          </ul>
+          <p><strong>Step 10:</strong> Feature Importance Visualisation:</p>
+          <ul>
+          <li>Extract <code>feature_importances_</code> from the trained Random Forest.</li>
+          <li>Plot a horizontal bar chart to show the relative importance of each feature.</li>
+          <li>Identify which features contribute most to the classification and discuss how this aids interpretation.</li>
+          </ul>
+          <p><strong>Step 11:</strong> Evaluate Model Performance:</p>
+          <ul>
+          <li>Generate predictions on the test set using the best Random Forest configuration.</li>
+          <li>Compute Accuracy, Precision, Recall, and F1-Score.</li>
+          <li>Plot a Confusion Matrix heatmap to visualise true positives, true negatives, false positives, and false negatives.</li>
+          <li>Display the full Classification Report using <code>classification_report()</code>.</li>
+          </ul>
           <hr>
-          <h2 id="multi-class-classification">Multi-Class Classification</h2>
-          <p>The objective of this experiment is to classify wheat seeds into three different varieties based on a set of geometric measurements. The input to the model consists of multiple independent variables representing seed features (such as area, perimeter, and kernel dimensions), while the output is a categorical dependent variable indicating the seed's variety (Class 1, 2, or 3).</p>
-          <p><strong>Step 1</strong>: <strong>Import Required Libraries</strong>: Import the essential Python libraries: <code>pandas</code> and <code>numpy</code>.</p>
-          <p><strong>Step 2</strong>: <strong>Load the Dataset</strong>: Load <code>Seeds_Dataset.csv</code>. The Seeds dataset contains geometric measurements of 210 wheat seed samples belonging to three different varieties. It includes 7 numerical features related to seed shape and size, with one class label used for classification tasks.</p>
-          <p><strong>Step 3</strong>: <strong>Perform Data Analysis</strong>: Analyze the dataset using <code>head()</code>, <code>tail()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code>.</p>
-          <p><strong>Step 4</strong>: <strong>Define Features X and Y</strong>:
-              - <strong>Features (X)</strong>: Area, Perimeter, Compactness, Length of Kernel, Width of Kernel, Asymmetry Coefficient, Length of Kernel Groove.
-              - <strong>Target (Y)</strong>: Class (1, 2, or 3).</p>
-          <p><strong>Step 5</strong>: <strong>Split the Dataset</strong>: Split into 80% Training Set and 20% Testing Set.</p>
-          <p><strong>Step 6</strong>: <strong>Train the Random Forest Classifier</strong>: Initialize and configure the Random Forest Classifier by setting important parameters such as the splitting criteria and the number of trees in the forest. Train the classifier using the training dataset.</p>
-          <p><strong>Step 7</strong>: <strong>Make Predictions on Test Data</strong>: Using the trained Random Forest model, predict outcomes for the test dataset by passing its features as input.</p>
-          <p><strong>Step 8</strong>: <strong>Evaluate Model Performance</strong>: Evaluate the Random Forest model using the accuracy score to measure overall correctness, the confusion matrix to show true and false predictions, and the classification report to summarize precision, recall, and F1-score for each class.</p>
+          <h2 id="part-2-multi-class-classification-seeds-dataset">Part 2: Multi-Class Classification (Seeds Dataset)</h2>
+          <p>The objective of this part is to classify wheat seeds into three varieties (Kama, Rosa, and Canadian) based on geometric measurements, using a Random Forest classifier. This part reinforces ensemble concepts in a multi-class setting and includes comparative analysis and hyperparameter tuning.</p>
+          <p><strong>Step 1:</strong> Import the required libraries: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>, <code>seaborn</code>, and the relevant modules from <code>sklearn</code>.</p>
+          <p><strong>Step 2:</strong> Load the Seeds dataset (<code>Seeds_Dataset.csv</code>). The dataset contains 210 wheat seed samples with 7 numerical features (Area, Perimeter, Compactness, Length of Kernel, Width of Kernel, Asymmetry Coefficient, Length of Kernel Groove) and a class label identifying the seed variety (1, 2, or 3).</p>
+          <p><strong>Step 3:</strong> Perform Exploratory Data Analysis:</p>
+          <ul>
+          <li>Use <code>head()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code> to inspect the data.</li>
+          <li>Check class distribution using <code>value_counts()</code>.</li>
+          <li>Plot pairwise scatter plots or histograms to visualise feature distributions across the three classes.</li>
+          </ul>
+          <p><strong>Step 4:</strong> Define Features and Target:</p>
+          <ul>
+          <li><strong>Features (X):</strong> Area, Perimeter, Compactness, Length of Kernel, Width of Kernel, Asymmetry Coefficient, Length of Kernel Groove.</li>
+          <li><strong>Target (Y):</strong> Class (1, 2, or 3).</li>
+          </ul>
+          <p><strong>Step 5:</strong> Split the dataset into 80% Training Set and 20% Testing Set using <code>train_test_split()</code> with stratified sampling to preserve class proportions.</p>
+          <p><strong>Step 6:</strong> Train a Single Decision Tree as Baseline:</p>
+          <ul>
+          <li>Initialize a <code>DecisionTreeClassifier</code> with <code>criterion='gini'</code>.</li>
+          <li>Fit on the training data and record test accuracy for comparison.</li>
+          </ul>
+          <p><strong>Step 7:</strong> Train a Random Forest Classifier:</p>
+          <ul>
+          <li>Initialize <code>RandomForestClassifier</code> with <code>n_estimators=150</code>, <code>criterion='gini'</code>, and <code>random_state=42</code>.</li>
+          <li>Fit on the training data, record test accuracy, and compare with the Decision Tree baseline.</li>
+          </ul>
+          <p><strong>Step 8:</strong> Hyperparameter Exploration:</p>
+          <ul>
+          <li><strong>Vary <code>n_estimators</code></strong> (e.g., 10, 50, 100, 150, 300): Plot accuracy vs. number of trees.</li>
+          <li><strong>Vary <code>max_depth</code></strong> (e.g., 3, 5, 10, None): Observe the impact on multi-class performance.</li>
+          <li><strong>Vary <code>criterion</code></strong> ('gini' vs. 'entropy'): Compare the two splitting strategies and note any differences in accuracy or tree structure.</li>
+          </ul>
+          <p><strong>Step 9:</strong> OOB Score Analysis:</p>
+          <ul>
+          <li>Enable <code>oob_score=True</code> and compare <code>oob_score_</code> with test accuracy.</li>
+          <li>Discuss how OOB eliminates the need for cross-validation and provides a quick generalisation estimate.</li>
+          </ul>
+          <p><strong>Step 10:</strong> Feature Importance Visualisation:</p>
+          <ul>
+          <li>Extract and plot <code>feature_importances_</code> as a bar chart.</li>
+          <li>Identify which geometric measurements are most influential in distinguishing the three seed varieties.</li>
+          </ul>
+          <p><strong>Step 11:</strong> Evaluate Model Performance:</p>
+          <ul>
+          <li>Generate predictions on the test set.</li>
+          <li>Compute Accuracy, Precision (macro), Recall (macro), and F1-Score (macro).</li>
+          <li>Plot a Confusion Matrix heatmap to visualise per-class performance.</li>
+          <li>Display the full Classification Report with per-class precision, recall, and F1-Score.</li>
+          </ul>
           
           </div>
           <div class="bug-report-mobile">

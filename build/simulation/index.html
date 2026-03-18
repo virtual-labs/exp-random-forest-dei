@@ -88,7 +88,7 @@
 						<div class="selector-card">
 							<h2>Select Impurity Criterion</h2>
 							<p>Choose the metric to evaluate the quality of a split in the decision tree.</p>
-							<div class="criterion-options">
+							<div class="criterion-options criterion-options-3">
 								<div class="criterion-option" onclick="selectCriterion('gini')">
 									<h3>Gini Impurity</h3>
 									<p>Measures the probability of misclassifying a randomly chosen element.</p>
@@ -96,6 +96,10 @@
 								<div class="criterion-option" onclick="selectCriterion('entropy')">
 									<h3>Entropy</h3>
 									<p>Measures the level of impurity or disorder in a group.</p>
+								</div>
+								<div class="criterion-option criterion-option-both" onclick="selectCriterion('both')">
+									<h3>Both (Compare)</h3>
+									<p>Train with both criteria and compare their performance side-by-side.</p>
 								</div>
 							</div>
 						</div>
@@ -208,8 +212,8 @@
 				</div>
 
 				<div class="rf-modal-tabs">
-					<button class="rf-modal-tab active" data-tab="prediction">Prediction Path</button>
-					<button class="rf-modal-tab" data-tab="visual">Visual Tree</button>
+					<button class="rf-modal-tab active" data-tab="prediction" title="Step-by-step decision path showing how this tree classified the sample">Prediction Path</button>
+					<button class="rf-modal-tab" data-tab="visual" title="Interactive visual diagram of the full tree structure — click nodes for details">Visual Tree</button>
 				</div>
 
 				<button class="rf-modal-close-btn" id="rfModalCloseBtn">
@@ -234,13 +238,13 @@
 				<!-- Visual Tree View -->
 				<div class="rf-visual-tree-view" id="rfVisualTreeView">
 					<div class="rf-visual-tree-controls">
-						<button class="rf-visual-tree-control-btn" id="rfZoomIn">
+						<button class="rf-visual-tree-control-btn" id="rfZoomIn" title="Zoom in">
 							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 								stroke-width="2">
 								<path d="M12 4v16m8-8H4" />
 							</svg>
 						</button>
-						<button class="rf-visual-tree-control-btn" id="rfZoomOut">
+						<button class="rf-visual-tree-control-btn" id="rfZoomOut" title="Zoom out">
 							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 								stroke-width="2">
 								<path d="M20 12H4" />
