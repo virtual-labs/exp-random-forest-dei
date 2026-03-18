@@ -354,49 +354,238 @@
               <h2 id="random-forest">Random Forest</h2>
           
             </div>
-              <p>A Random Forest is a supervised ensemble learning algorithm used for both classification and regression tasks. It builds multiple decision trees during training and combines their outputs to produce a more accurate and stable prediction. Instead of relying on a single tree, Random Forest aggregates the results of many trees to reduce overfitting and improve generalization.</p>
-          <h3 id="1-main-components-of-a-random-forest">1. Main Components of a Random Forest</h3>
-          <p>The main components of a Random Forest are:</p>
-          <ul>
-          <li><strong>Decision Trees</strong>: Individual models trained on different subsets of data.</li>
-          <li><strong>Bootstrap Samples</strong>: Random subsets of the original dataset selected with replacement.</li>
-          <li><strong>Feature Randomness</strong>: A random subset of features is considered at each split to ensure diversity among trees.</li>
-          </ul>
-          <p>Each tree in the forest makes a prediction, and the final output is determined by majority voting (for classification) or averaging (for regression).</p>
-          <h3 id="2-how-random-forest-works">2. How Random Forest Works</h3>
-          <p>A Random Forest works by constructing multiple decision trees using different bootstrap samples of the training data. For each tree, at every node, only a random subset of features is considered when selecting the best split. This randomness ensures that the trees are diverse and not highly correlated.</p>
-          <h3 id="3-splitting-criteria">3. Splitting Criteria</h3>
-          <p>The splitting criteria commonly used include Gini Index and Entropy. The Gini Index measures the impurity of a node, representing the probability of incorrectly classifying a randomly chosen sample if it were labeled according to the class distribution in the node. The Gini Index is calculated as:</p>
-          <div align="center" style="font-size: 1.2rem; margin: 20px 0;">
-              <strong>Gini = Σ<sub>i=1</sub><sup>n</sup> p<sub>i</sub><sup>2</sup></strong>
+              <p>A Random Forest is a supervised ensemble learning algorithm used for both classification and regression tasks. Instead of relying on a single decision tree (which can easily overfit the training data), Random Forest builds many decision trees during training and combines their outputs to produce a more accurate and stable prediction. Each individual tree in the forest may be a relatively weak learner on its own, but when many such trees vote together, the ensemble becomes a strong learner with significantly improved generalisation.</p>
+          <h3 id="1-from-a-single-decision-tree-to-a-forest">1. From a Single Decision Tree to a Forest</h3>
+          <p>A single Decision Tree learns by recursively splitting data on features to create decision rules. While simple and interpretable, it has a key limitation: <strong>high variance</strong>. Small changes in training data can produce a completely different tree, leading to overfitting.</p>
+          <p>Random Forest addresses this by building an <strong>ensemble</strong> of many decision trees and aggregating their predictions. The core idea is:</p>
+          <blockquote>
+          <p><em>Many weak learners, each slightly different, can combine to form one strong learner.</em></p>
+          </blockquote>
+          <p>The two sources of randomness that make the trees diverse are <strong>Bootstrap Sampling (Bagging)</strong> and <strong>Random Feature Selection</strong>, explained below.</p>
+          <div style="text-align:center; margin:24px 0;">
+          <img src="images/dt_vs_rf.png" alt="Single Decision Tree vs Random Forest" style="max-width:820px; width:100%; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.10);">
+          <p style="color:#64748b; font-size:0.92rem; margin-top:8px;"><em>Figure 1 — A single Decision Tree (left) vs. a Random Forest ensemble (right). Each tree votes independently and the final prediction is made via majority voting.</em></p>
           </div>
           
-          <p>Lower Gini values indicate purer nodes, with a value of zero when all samples belong to one class. However, it is slightly biased toward dominant classes.</p>
-          <p>Entropy, on the other hand, measures the amount of uncertainty or disorder in a node and is used to calculate Information Gain. It is computed as:</p>
-          <div align="center" style="font-size: 1.2rem; margin: 20px 0;">
-              <strong>Entropy = − Σ<sub>i=1</sub><sup>n</sup> p<sub>i</sub> log<sub>2</sub>(p<sub>i</sub>)</strong>
+          <h3 id="2-bootstrap-sampling-bagging">2. Bootstrap Sampling (Bagging)</h3>
+          <p>Bagging (Bootstrap Aggregating) is the first source of randomness. For each tree in the forest:</p>
+          <ol>
+          <li>A <strong>bootstrap sample</strong> is created by randomly selecting N samples <strong>with replacement</strong> from the original training set of N samples.</li>
+          <li>On average, each bootstrap sample contains about <strong>63%</strong> of unique training samples (since sampling is with replacement, some samples appear more than once and some are left out).</li>
+          <li>The remaining ~<strong>37%</strong> of samples that are <strong>not</strong> selected for a given tree are called <strong>Out-of-Bag (OOB)</strong> samples. These act as a built-in validation set for that tree.</li>
+          </ol>
+          <div style="text-align:center; margin:24px 0;">
+          <img src="images/bootstrap_sampling.png" alt="Bootstrap Sampling" style="max-width:750px; width:100%; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.10);">
+          <p style="color:#64748b; font-size:0.92rem; margin-top:8px;"><em>Figure 2 — Bootstrap sampling: each tree receives a different random subset (with replacement) of the training data. Unselected samples become OOB samples.</em></p>
           </div>
           
-          <p>Entropy is zero for a perfectly pure node, with higher values indicating greater disorder. It is sensitive to small changes in class distribution and often produces balanced and informative splits.</p>
-          <h3 id="4-prediction-mechanism">4. Prediction Mechanism</h3>
-          <p>Once all trees are trained, predictions are made by combining the outputs of individual trees. In classification, the class predicted by the majority of trees is selected, while in regression, the average of all tree predictions is taken as the final output. By combining multiple trees, Random Forest reduces variance, minimizes overfitting, and provides higher accuracy compared to a single decision tree.</p>
-          <h3 id="5-merits-of-random-forest">5. Merits of Random Forest</h3>
+          <p>Because each tree is trained on a different subset, the trees learn slightly different patterns, making their errors less correlated. When combined, the variance of the overall model drops significantly.</p>
+          <h3 id="3-random-feature-selection">3. Random Feature Selection</h3>
+          <p>The second source of randomness occurs at <strong>every split</strong> during tree construction. Instead of evaluating all available features to find the best split, each node only considers a <strong>random subset of m features</strong> (typically m = √p for classification, where p is the total number of features).</p>
+          <p>This prevents dominant features from appearing at the root of every tree, forcing the forest to explore a wider variety of feature interactions. Without this step, all trees would look very similar despite using different bootstrap samples.</p>
+          <div style="text-align:center; margin:24px 0;">
+          <img src="images/feature_randomness.png" alt="Feature Randomness at Each Split" style="max-width:750px; width:100%; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.10);">
+          <p style="color:#64748b; font-size:0.92rem; margin-top:8px;"><em>Figure 3 — At each node, only a random subset of features (highlighted) is evaluated. Different nodes and different trees use different subsets.</em></p>
+          </div>
+          
+          <h3 id="4-bagging--feature-randomness-working-together">4. Bagging + Feature Randomness: Working Together</h3>
+          <p>The power of Random Forest comes from combining <strong>both</strong> sources of randomness:</p>
+          <table>
+          <thead>
+          <tr>
+          <th>Source of Randomness</th>
+          <th>What it does</th>
+          <th>Effect</th>
+          </tr>
+          </thead>
+          <tbody><tr>
+          <td><strong>Bootstrap Sampling</strong></td>
+          <td>Each tree trains on a different data subset</td>
+          <td>Reduces variance by decorrelating trees</td>
+          </tr>
+          <tr>
+          <td><strong>Feature Randomness</strong></td>
+          <td>Each split considers a random feature subset</td>
+          <td>Prevents dominant features from making trees similar</td>
+          </tr>
+          <tr>
+          <td><strong>Combined Effect</strong></td>
+          <td>Trees are diverse in both data and features</td>
+          <td>Ensemble is robust, low-variance, and generalises well</td>
+          </tr>
+          </tbody></table>
+          <div style="text-align:center; margin:24px 0;">
+          <img src="images/bagging_plus_feature_randomness.jpg" alt="Bagging + Feature Randomness" style="max-width:820px; width:100%; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.10);">
+          <p style="color:#64748b; font-size:0.92rem; margin-top:8px;"><em>Figure 4 — Random Forest = Bagging (different data subsets) + Feature Randomness (different feature subsets at each split). This dual randomness produces a diverse, high-performing ensemble.</em></p>
+          </div>
+          
+          <h3 id="5-splitting-criteria">5. Splitting Criteria</h3>
+          <p>At each node, the best split is chosen from the randomly selected feature subset using an impurity measure. The two commonly used criteria are:</p>
+          <p><strong>Gini Impurity</strong> measures the probability of misclassifying a randomly chosen sample:</p>
+          <div align="center" style="font-size: 1.2rem; margin: 20px 0;">
+              <strong>Gini = 1 − Σ<sub>i=1</sub><sup>C</sup> p<sub>i</sub><sup>2</sup></strong>
+          </div>
+          
+          <p>where p<sub>i</sub> is the proportion of samples belonging to class i, and C is the total number of classes. A Gini value of <strong>0</strong> indicates a perfectly pure node (all samples belong to one class). Higher values indicate more impurity.</p>
+          <p><strong>Entropy</strong> measures the amount of uncertainty or disorder in a node:</p>
+          <div align="center" style="font-size: 1.2rem; margin: 20px 0;">
+              <strong>Entropy = − Σ<sub>i=1</sub><sup>C</sup> p<sub>i</sub> log<sub>2</sub>(p<sub>i</sub>)</strong>
+          </div>
+          
+          <p>Entropy is <strong>0</strong> for a pure node and reaches its maximum when classes are equally distributed. Information Gain, which is the reduction in entropy after a split, is used to select the best feature and threshold.</p>
+          <p>Both criteria generally produce similar trees. Gini is computationally slightly faster (no logarithm), while Entropy tends to produce more balanced splits.</p>
+          <h3 id="6-prediction-mechanism">6. Prediction Mechanism</h3>
+          <p>Once all trees are trained, a new sample is passed through <strong>every</strong> tree in the forest:</p>
           <ul>
-          <li><strong>High Accuracy &amp; Robustness</strong>: By combining multiple decision trees, Random Forest reduces overfitting and usually gives better accuracy than a single decision tree.</li>
-          <li><strong>Handles Large &amp; Complex Data</strong>: It works well with large datasets and can handle both numerical and categorical features effectively.</li>
-          <li><strong>Feature Importance Estimation</strong>: Random Forest can measure the importance of each feature, helping in feature selection and understanding the model.</li>
+          <li><strong>Classification</strong>: Each tree votes for a class. The class with the <strong>majority of votes</strong> becomes the final prediction.</li>
+          <li><strong>Regression</strong>: Each tree outputs a numeric value. The <strong>average</strong> of all outputs is the final prediction.</li>
           </ul>
-          <h3 id="6-demerits-of-random-forest">6. Demerits of Random Forest</h3>
+          <div style="text-align:center; margin:24px 0;">
+          <img src="images/majority_voting.jpg" alt="Majority Voting" style="max-width:750px; width:100%; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.10);">
+          <p style="color:#64748b; font-size:0.92rem; margin-top:8px;"><em>Figure 5 — Prediction via majority voting: each tree votes independently, and the class with the most votes wins.</em></p>
+          </div>
+          
+          <h4 id="example">Example</h4>
+          <p>Suppose a Random Forest contains 5 trees and predicts whether an email is <strong>Spam</strong> or <strong>Not Spam</strong>:</p>
+          <table>
+          <thead>
+          <tr>
+          <th>Tree</th>
+          <th>Prediction</th>
+          </tr>
+          </thead>
+          <tbody><tr>
+          <td>Tree 1</td>
+          <td>Spam</td>
+          </tr>
+          <tr>
+          <td>Tree 2</td>
+          <td>Not Spam</td>
+          </tr>
+          <tr>
+          <td>Tree 3</td>
+          <td>Spam</td>
+          </tr>
+          <tr>
+          <td>Tree 4</td>
+          <td>Spam</td>
+          </tr>
+          <tr>
+          <td>Tree 5</td>
+          <td>Not Spam</td>
+          </tr>
+          </tbody></table>
+          <p><strong>Majority vote = Spam (3 out of 5 trees)</strong>. Even though two trees predicted "Not Spam", the ensemble correctly classifies the email by following the majority.</p>
+          <h3 id="7-out-of-bag-oob-error-estimation">7. Out-of-Bag (OOB) Error Estimation</h3>
+          <p>A unique advantage of Random Forest is <strong>built-in cross-validation</strong> through OOB samples. Since each tree was trained on only ~63% of the data, the remaining ~37% (OOB samples) can be used to evaluate that tree's performance <strong>without needing a separate validation set</strong>.</p>
+          <p>The OOB error is computed by:</p>
+          <ol>
+          <li>For each training sample, collecting predictions only from trees where it was <strong>not</strong> in the bootstrap sample.</li>
+          <li>Using majority voting on those predictions to classify the sample.</li>
+          <li>Computing the overall misclassification rate.</li>
+          </ol>
+          <p>The OOB error is an unbiased estimate of the generalisation error and closely approximates leave-one-out cross-validation.</p>
+          <h3 id="8-key-hyperparameters">8. Key Hyperparameters</h3>
+          <table>
+          <thead>
+          <tr>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Typical Values</th>
+          </tr>
+          </thead>
+          <tbody><tr>
+          <td><strong>n_estimators</strong></td>
+          <td>Number of trees in the forest</td>
+          <td>100–500 (more trees → better accuracy, diminishing returns)</td>
+          </tr>
+          <tr>
+          <td><strong>max_features</strong></td>
+          <td>Number of features considered at each split</td>
+          <td>√p (classification), p/3 (regression)</td>
+          </tr>
+          <tr>
+          <td><strong>max_depth</strong></td>
+          <td>Maximum depth of each tree</td>
+          <td>None (grow fully) or limited to prevent overfitting</td>
+          </tr>
+          <tr>
+          <td><strong>min_samples_split</strong></td>
+          <td>Minimum samples required to split a node</td>
+          <td>2–10</td>
+          </tr>
+          <tr>
+          <td><strong>min_samples_leaf</strong></td>
+          <td>Minimum samples required at a leaf node</td>
+          <td>1–5</td>
+          </tr>
+          </tbody></table>
+          <p>Increasing <strong>n_estimators</strong> generally improves performance but increases computation time. Reducing <strong>max_features</strong> increases tree diversity but may reduce individual tree accuracy. The balance between these parameters is key to a well-performing Random Forest.</p>
+          <h3 id="9-decision-tree-vs-random-forest">9. Decision Tree vs. Random Forest</h3>
+          <table>
+          <thead>
+          <tr>
+          <th>Aspect</th>
+          <th>Single Decision Tree</th>
+          <th>Random Forest</th>
+          </tr>
+          </thead>
+          <tbody><tr>
+          <td><strong>Model Type</strong></td>
+          <td>Single model</td>
+          <td>Ensemble of many trees</td>
+          </tr>
+          <tr>
+          <td><strong>Variance</strong></td>
+          <td>High (sensitive to data changes)</td>
+          <td>Low (averaging reduces variance)</td>
+          </tr>
+          <tr>
+          <td><strong>Overfitting</strong></td>
+          <td>Prone to overfitting</td>
+          <td>Resistant due to bagging + randomness</td>
+          </tr>
+          <tr>
+          <td><strong>Accuracy</strong></td>
+          <td>Moderate</td>
+          <td>Generally higher</td>
+          </tr>
+          <tr>
+          <td><strong>Interpretability</strong></td>
+          <td>Easy (one tree to follow)</td>
+          <td>Harder (many trees)</td>
+          </tr>
+          <tr>
+          <td><strong>Training Time</strong></td>
+          <td>Fast</td>
+          <td>Slower (many trees)</td>
+          </tr>
+          <tr>
+          <td><strong>Feature Importance</strong></td>
+          <td>Available but unstable</td>
+          <td>Stable and reliable</td>
+          </tr>
+          </tbody></table>
+          <h3 id="10-merits-of-random-forest">10. Merits of Random Forest</h3>
+          <ul>
+          <li><strong>High Accuracy &amp; Robustness</strong>: Combining multiple trees reduces overfitting and usually gives better accuracy than a single decision tree.</li>
+          <li><strong>Handles Large &amp; Complex Data</strong>: Works well with large datasets and can handle both numerical and categorical features.</li>
+          <li><strong>Feature Importance Estimation</strong>: Measures the importance of each feature based on impurity reduction, aiding feature selection.</li>
+          <li><strong>Built-in Validation</strong>: OOB error provides a reliable generalisation estimate without needing a separate validation set.</li>
+          <li><strong>Minimal Preprocessing</strong>: Does not require feature scaling or normalisation.</li>
+          </ul>
+          <h3 id="11-demerits-of-random-forest">11. Demerits of Random Forest</h3>
           <ul>
           <li><strong>Computationally Expensive</strong>: Training many trees requires more time and memory compared to simpler models.</li>
-          <li><strong>Less Interpretability</strong>: The ensemble nature makes it difficult to interpret compared to a single decision tree.</li>
-          <li><strong>Not Ideal for Real-Time Prediction</strong>: Due to multiple trees, prediction can be slower, making it less suitable for time-critical applications.</li>
+          <li><strong>Less Interpretability</strong>: The ensemble nature makes it harder to interpret compared to a single decision tree.</li>
+          <li><strong>Not Ideal for Real-Time Prediction</strong>: Multiple trees increase prediction latency.</li>
+          <li><strong>Large Model Size</strong>: Storing hundreds of trees consumes more memory than a single model.</li>
           </ul>
-          <h3 id="7-algorithm">7. Algorithm</h3>
+          <h3 id="12-algorithm">12. Algorithm</h3>
           <ul>
           <li><strong>Step 1:</strong> Set parameters:<ul>
           <li>n = number of trees to build</li>
-          <li>m = number of features to consider at each split (usually √total_features)</li>
+          <li>m = number of features to consider at each split (usually √total_features for classification)</li>
           </ul>
           </li>
           <li><strong>Step 2:</strong> For each tree i = 1 to n:<ul>
@@ -428,12 +617,17 @@
           <li><strong>Step 5:</strong> For prediction (<strong>Regression</strong>):<ul>
           <li>Pass new sample through all trees</li>
           <li>Each tree gives one numeric prediction</li>
-          <li>Final prediction is calculated as the average of all tree predictions</li>
+          <li>Final prediction = average of all tree predictions</li>
           </ul>
           </li>
-          <li><strong>Step 6:</strong> Calculate Feature Importance:<ul>
+          <li><strong>Step 6:</strong> Evaluate using OOB Error:<ul>
+          <li>For each sample, aggregate predictions from trees that did not include it</li>
+          <li>Compute misclassification rate as OOB error estimate</li>
+          </ul>
+          </li>
+          <li><strong>Step 7:</strong> Calculate Feature Importance:<ul>
           <li>For each feature, sum up how much it reduced impurity across all trees</li>
-          <li>Normalize to get importance scores</li>
+          <li>Normalise to get importance scores</li>
           </ul>
           </li>
           </ul>
