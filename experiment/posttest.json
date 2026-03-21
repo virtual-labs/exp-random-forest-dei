@@ -10,9 +10,9 @@
         "d": "Bagging"
       },
       "explanations": {
-        "a": "Pruning applies to individual Decision Trees and does not address ensemble-level stability.",
-        "b": "Random Forest is scale-invariant, so normalization does not improve stability.",
-        "c": "Standardization has little effect on tree-based models.",
+        "a": "Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability.",
+        "b": "Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability.",
+        "c": "Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability.",
         "d": "Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability."
       },
       "correctAnswer": "d",
@@ -28,9 +28,9 @@
       },
       "explanations": {
         "a": "By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization.",
-        "b": "Interpretability is typically lower for Random Forest than for a single tree.",
-        "c": "Tree-based models are usually scale-invariant and do not require strict feature scaling.",
-        "d": "Random Forest combines predictions from multiple trees, not just one."
+        "b": "By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization.",
+        "c": "By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization.",
+        "d": "By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization."
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
@@ -44,10 +44,10 @@
         "d": "Bias remains constant, variance increases"
       },
       "explanations": {
-        "a": "Random Forest is designed to reduce variance.",
+        "a": "Random Forest slightly reduces bias and significantly reduces variance.",
         "b": "Random Forest slightly reduces bias and significantly reduces variance.",
-        "c": "Bias does not increase in Random Forest.",
-        "d": "Variance is reduced, not increased."
+        "c": "Random Forest slightly reduces bias and significantly reduces variance.",
+        "d": "Random Forest slightly reduces bias and significantly reduces variance."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -61,10 +61,10 @@
         "d": "max_depth"
       },
       "explanations": {
-        "a": "n_estimators controls number of trees.",
+        "a": "max_features controls how many features are randomly considered at each split.",
         "b": "max_features controls how many features are randomly considered at each split.",
-        "c": "This controls node splitting, not feature randomness.",
-        "d": "max_depth controls tree depth."
+        "c": "max_features controls how many features are randomly considered at each split.",
+        "d": "max_features controls how many features are randomly considered at each split."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -78,10 +78,10 @@
         "d": "It removes noisy features automatically"
       },
       "explanations": {
-        "a": "Noise impact is reduced due to averaging.",
-        "b": "Noise still affects individual trees.",
+        "a": "Averaging predictions reduces the influence of noisy samples.",
+        "b": "Averaging predictions reduces the influence of noisy samples.",
         "c": "Averaging predictions reduces the influence of noisy samples.",
-        "d": "Random Forest does not explicitly remove noise."
+        "d": "Averaging predictions reduces the influence of noisy samples."
       },
       "correctAnswer": "c",
       "difficulty": "intermediate"
@@ -95,10 +95,10 @@
         "d": "Gradient update"
       },
       "explanations": {
-        "a": "Majority voting is used in classification.",
-        "b": "Median is not the default method.",
+        "a": "Random Forest regression averages predictions from all trees.",
+        "b": "Random Forest regression averages predictions from all trees.",
         "c": "Random Forest regression averages predictions from all trees.",
-        "d": "Gradient updates are used in boosting."
+        "d": "Random Forest regression averages predictions from all trees."
       },
       "correctAnswer": "c",
       "difficulty": "intermediate"
@@ -112,10 +112,10 @@
         "d": "Uses complex mathematical optimization"
       },
       "explanations": {
-        "a": "Backpropagation is used in neural networks.",
+        "a": "Multiple trees increase memory and computation requirements.",
         "b": "Multiple trees increase memory and computation requirements.",
-        "c": "Feature scaling is not required.",
-        "d": "Tree-based models are rule-based."
+        "c": "Multiple trees increase memory and computation requirements.",
+        "d": "Multiple trees increase memory and computation requirements."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -129,10 +129,10 @@
         "d": "Streaming real-time learning"
       },
       "explanations": {
-        "a": "Simpler models work better here.",
+        "a": "Random Forest handles high dimensionality and nonlinearity well.",
         "b": "Random Forest handles high dimensionality and nonlinearity well.",
-        "c": "Random Forest requires labeled data.",
-        "d": "Traditional Random Forest is not designed for streaming."
+        "c": "Random Forest handles high dimensionality and nonlinearity well.",
+        "d": "Random Forest handles high dimensionality and nonlinearity well."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -146,10 +146,10 @@
         "d": "Reinforcement rewards"
       },
       "explanations": {
-        "a": "Gradients are not computed.",
+        "a": "Random Forest estimates feature importance based on split contributions.",
         "b": "Random Forest estimates feature importance based on split contributions.",
-        "c": "Clustering is unsupervised.",
-        "d": "No reward mechanism exists."
+        "c": "Random Forest estimates feature importance based on split contributions.",
+        "d": "Random Forest estimates feature importance based on split contributions."
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
@@ -163,10 +163,10 @@
         "d": "It requires fewer trees"
       },
       "explanations": {
-        "a": "This is a property of boosting.",
+        "a": "Boosting may overfit noisy data, while Random Forest is more stable.",
         "b": "Boosting may overfit noisy data, while Random Forest is more stable.",
-        "c": "Gradient descent is not used.",
-        "d": "Tree count varies."
+        "c": "Boosting may overfit noisy data, while Random Forest is more stable.",
+        "d": "Boosting may overfit noisy data, while Random Forest is more stable."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -180,10 +180,10 @@
         "d": "Number of features selected at each split"
       },
       "explanations": {
-        "a": "Training accuracy uses in-bag data, not OOB data.",
-        "b": "OOB is a performance estimate, not a complexity measure.",
+        "a": "OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate.",
+        "b": "OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate.",
         "c": "OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate.",
-        "d": "Feature selection per split is controlled by max_features, not OOB score."
+        "d": "OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate."
       },
       "correctAnswer": "c",
       "difficulty": "intermediate"
@@ -198,9 +198,9 @@
       },
       "explanations": {
         "a": "More trees can improve ensemble stability and performance, but gains typically taper off while cost increases.",
-        "b": "Random Forest is generally resistant to overfitting from adding trees.",
-        "c": "More trees increase memory and computation requirements.",
-        "d": "Bagging remains a core mechanism regardless of tree count."
+        "b": "More trees can improve ensemble stability and performance, but gains typically taper off while cost increases.",
+        "c": "More trees can improve ensemble stability and performance, but gains typically taper off while cost increases.",
+        "d": "More trees can improve ensemble stability and performance, but gains typically taper off while cost increases."
       },
       "correctAnswer": "a",
       "difficulty": "intermediate"
@@ -215,9 +215,9 @@
       },
       "explanations": {
         "a": "Considering fewer features per split increases randomness, often making trees less correlated.",
-        "b": "Bootstrap sampling and feature subsampling are separate mechanisms.",
-        "c": "No single setting guarantees best performance across all datasets.",
-        "d": "Changing max_features does not change the algorithm family."
+        "b": "Considering fewer features per split increases randomness, often making trees less correlated.",
+        "c": "Considering fewer features per split increases randomness, often making trees less correlated.",
+        "d": "Considering fewer features per split increases randomness, often making trees less correlated."
       },
       "correctAnswer": "a",
       "difficulty": "intermediate"
@@ -232,9 +232,9 @@
       },
       "explanations": {
         "a": "Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction).",
-        "b": "High importance suggests usefulness, not removal.",
-        "c": "Unused features usually receive near-zero importance.",
-        "d": "Importance is not determined by data type alone."
+        "b": "Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction).",
+        "c": "Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction).",
+        "d": "Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction)."
       },
       "correctAnswer": "a",
       "difficulty": "intermediate"
