@@ -1315,13 +1315,13 @@ function renderSidebar() {
             btn.innerHTML = `✓ ${step.title}`;
         } else if (index === STATE.currentStep) {
             btn.classList.add('active');
-            btn.innerHTML = `${index + 1}. ${step.title}`;
+            btn.textContent = `${index + 1}. ${step.title}`;
         } else if (status && status.unlocked) {
             btn.classList.add('unlocked');
-            btn.innerHTML = `${index + 1}. ${step.title}`;
+            btn.textContent = `${index + 1}. ${step.title}`;
         } else {
             btn.classList.add('disabled');
-            btn.innerHTML = `${index + 1}. ${step.title}`;
+            btn.textContent = `${index + 1}. ${step.title}`;
         }
 
         // Click to navigate
@@ -1392,6 +1392,56 @@ function checkAllStepsCompleted() {
     return STATE.stepsStatus.every(status => status.completed);
 }
 
+function normalizeHeaderText(text) {
+    return (text || "")
+        .toLowerCase()
+        .replace(/&[a-z]+;/g, " ")
+        .replace(/[^a-z0-9]+/g, " ")
+        .trim();
+}
+
+function extractPrintedLiteral(line) {
+    const trimmed = (line || "").trim();
+    const match = trimmed.match(/^print\(\s*[fFrRuUbB]*["']([\s\S]*?)["']\s*\)\s*$/);
+    if (!match) return "";
+
+    return match[1]
+        .replace(/\\n/g, " ")
+        .replace(/\\t/g, " ")
+        .replace(/[-_=*#]+/g, " ")
+        .trim();
+}
+
+function sanitizeDisplayedCode(code, headerComment = "") {
+    if (!code) return "";
+
+    const isSeparatorComment = (line) => /^#\s*[=*_ -]{3,}\s*$/.test((line || "").trim());
+    const cleaned = code.split('\n').filter(line => !isSeparatorComment(line));
+
+    while (cleaned.length && !cleaned[0].trim()) cleaned.shift();
+
+    const normalizedHeader = normalizeHeaderText(headerComment);
+    if (normalizedHeader) {
+        const firstLine = cleaned[0] ? cleaned[0].trim() : "";
+        if (firstLine.startsWith('#')) {
+            const commentText = normalizeHeaderText(firstLine.replace(/^#\s*/, ''));
+            if (commentText === normalizedHeader) {
+                cleaned.shift();
+            }
+        }
+
+        while (cleaned.length && !cleaned[0].trim()) cleaned.shift();
+
+        const printHeading = cleaned[0] ? extractPrintedLiteral(cleaned[0]) : "";
+        if (printHeading && normalizeHeaderText(printHeading) === normalizedHeader) {
+            cleaned.shift();
+        }
+    }
+
+    while (cleaned.length && !cleaned[0].trim()) cleaned.shift();
+    return cleaned.join('\n').trim();
+}
+
 function loadStep(index, blockIdx = 0) {
     if (!STATE.activeSteps || index >= STATE.activeSteps.length) return;
 
@@ -1413,10 +1463,14 @@ function loadStep(index, blockIdx = 0) {
         if (step.blocks && Array.isArray(step.blocks) && step.blocks.length > 0) {
             const currentBlock = step.blocks[STATE.currentBlockIndex];
             if (currentBlock) {
-                codeDisplay.innerHTML = highlightCode(currentBlock.code);
+                codeDisplay.innerHTML = highlightCode(
+                    sanitizeDisplayedCode(currentBlock.code, currentBlock.comment || step.comment || "")
+                );
             }
         } else if (step.code) {
-            codeDisplay.innerHTML = highlightCode(step.code);
+            codeDisplay.innerHTML = highlightCode(
+                sanitizeDisplayedCode(step.code, step.comment || "")
+            );
         }
     }
 

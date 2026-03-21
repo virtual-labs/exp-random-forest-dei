@@ -12,7 +12,7 @@
       "explanations": {
         "a": "Unsupervised learning works without labeled output data and focuses on discovering hidden patterns. Random Forest requires known output labels during training, so it does not fall under unsupervised learning.",
         "b": "Reinforcement learning depends on interaction with an environment using rewards and penalties. Random Forest does not learn through feedback or delayed rewards, making this option incorrect.",
-        "c": "Random Forest learns from labeled input–output pairs and builds predictive models based on known targets. Hence, it is classified as a supervised learning algorithm.",
+        "c": "Random Forest learns from labeled input-output pairs and builds predictive models based on known targets. Hence, it is classified as a supervised learning algorithm.",
         "d": "Semi-supervised learning uses a mix of labeled and unlabeled data. Random Forest algorithms are trained entirely on labeled datasets and do not rely on unlabeled data."
       },
       "correctAnswer": "c",
