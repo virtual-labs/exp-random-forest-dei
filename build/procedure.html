@@ -354,10 +354,19 @@
               <h2 id="random-forest">Random Forest</h2>
           
             </div>
-              <h2 id="part-1-binary-classification-bank-marketing-dataset">Part 1: Binary Classification (Bank Marketing Dataset)</h2>
+              <style>
+          .math-inline {
+          font-family: "Cambria Math", "Times New Roman", "Georgia", serif;
+          font-style: italic;
+          font-size: 1.02em;
+          white-space: nowrap;
+          }
+          </style>
+          
+          <h2 id="part-1-binary-classification-bank-marketing-dataset">Part 1: Binary Classification (Bank Marketing Dataset)</h2>
           <p>The objective of this part is to classify bank customers into two categories (subscribed / not subscribed to a term deposit) using a Random Forest classifier, compare its performance against a single Decision Tree, and explore how key hyperparameters affect accuracy and generalisation.</p>
           <p><strong>Step 1:</strong> Import the required libraries: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>, <code>seaborn</code>, and the relevant modules from <code>sklearn</code> (tree, ensemble, model_selection, metrics).</p>
-          <p><strong>Step 2:</strong> Load the Bank Marketing dataset (<code>bank_marketing.csv</code>). The dataset contains approximately 45,211 records from direct phone-based marketing campaigns by a Portuguese bank. It includes 17 feature columns describing customer demographics, financial status, and campaign details, along with a binary target variable indicating subscription outcome (yes/no).</p>
+          <p><strong>Step 2:</strong> Load the Bank Marketing dataset (<code>bank_marketing.csv</code>). The dataset contains approximately <span class="math-inline">45,211</span> records from direct phone-based marketing campaigns by a Portuguese bank. It includes <span class="math-inline">17</span> feature columns describing customer demographics, financial status, and campaign details, along with a binary target variable indicating subscription outcome (yes/no).</p>
           <p><strong>Step 3:</strong> Perform Exploratory Data Analysis:</p>
           <ul>
           <li>Use <code>head()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code> to understand the structure and quality of the data.</li>
@@ -369,23 +378,23 @@
           <li><strong>Target (Y):</strong> subscription outcome (yes / no).</li>
           <li>Encode categorical features using <code>LabelEncoder</code> or <code>pd.get_dummies()</code>.</li>
           </ul>
-          <p><strong>Step 5:</strong> Split the dataset into 80% Training Set and 20% Testing Set using <code>train_test_split()</code> with a fixed <code>random_state</code> for reproducibility.</p>
+          <p><strong>Step 5:</strong> Split the dataset into <span class="math-inline">80%</span> Training Set and <span class="math-inline">20%</span> Testing Set using <code>train_test_split()</code> with a fixed <code>random_state</code> for reproducibility.</p>
           <p><strong>Step 6:</strong> Train a Single Decision Tree as Baseline:</p>
           <ul>
-          <li>Initialize a <code>DecisionTreeClassifier</code> with <code>max_depth=5</code> and <code>criterion='gini'</code>.</li>
+          <li>Initialize a <code>DecisionTreeClassifier</code> with <span class="math-inline">max_depth = 5</span> and <span class="math-inline">criterion = 'gini'</span>.</li>
           <li>Fit on the training data and record its test accuracy. This serves as a baseline to compare against the Random Forest.</li>
           </ul>
           <p><strong>Step 7:</strong> Train a Random Forest Classifier:</p>
           <ul>
-          <li>Initialize <code>RandomForestClassifier</code> with <code>n_estimators=100</code>, <code>criterion='gini'</code>, and <code>random_state=42</code>.</li>
+          <li>Initialize <code>RandomForestClassifier</code> with <span class="math-inline">n_estimators = 100</span>, <span class="math-inline">criterion = 'gini'</span>, and <span class="math-inline">random_state = 42</span>.</li>
           <li>Fit on the training data and record test accuracy.</li>
           <li>Compare the Random Forest accuracy with the single Decision Tree from Step 6 to observe the ensemble improvement.</li>
           </ul>
           <p><strong>Step 8:</strong> Hyperparameter Exploration:</p>
           <ul>
-          <li><strong>Vary <code>n_estimators</code></strong> (e.g., 10, 50, 100, 200, 500): Train a Random Forest for each value, record the test accuracy, and plot accuracy vs. number of trees to observe diminishing returns.</li>
-          <li><strong>Vary <code>max_depth</code></strong> (e.g., 3, 5, 10, 20, None): Observe the trade-off between underfitting and overfitting.</li>
-          <li><strong>Vary <code>max_features</code></strong> (e.g., 'sqrt', 'log2', 0.5, 1.0): Observe how feature randomness affects performance and tree diversity.</li>
+          <li><strong>Vary <code>n_estimators</code></strong> (e.g., <span class="math-inline">10, 50, 100, 200, 500</span>): Train a Random Forest for each value, record the test accuracy, and plot accuracy vs. number of trees to observe diminishing returns.</li>
+          <li><strong>Vary <code>max_depth</code></strong> (e.g., <span class="math-inline">3, 5, 10, 20, None</span>): Observe the trade-off between underfitting and overfitting.</li>
+          <li><strong>Vary <code>max_features</code></strong> (e.g., <span class="math-inline">'sqrt', 'log2', 0.5, 1.0</span>): Observe how feature randomness affects performance and tree diversity.</li>
           </ul>
           <p><strong>Step 9:</strong> OOB Score Analysis:</p>
           <ul>
@@ -409,7 +418,7 @@
           <h2 id="part-2-multi-class-classification-seeds-dataset">Part 2: Multi-Class Classification (Seeds Dataset)</h2>
           <p>The objective of this part is to classify wheat seeds into three varieties (Kama, Rosa, and Canadian) based on geometric measurements, using a Random Forest classifier. This part reinforces ensemble concepts in a multi-class setting and includes comparative analysis and hyperparameter tuning.</p>
           <p><strong>Step 1:</strong> Import the required libraries: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>, <code>seaborn</code>, and the relevant modules from <code>sklearn</code>.</p>
-          <p><strong>Step 2:</strong> Load the Seeds dataset (<code>Seeds_Dataset.csv</code>). The dataset contains 210 wheat seed samples with 7 numerical features (Area, Perimeter, Compactness, Length of Kernel, Width of Kernel, Asymmetry Coefficient, Length of Kernel Groove) and a class label identifying the seed variety (1, 2, or 3).</p>
+          <p><strong>Step 2:</strong> Load the Seeds dataset (<code>Seeds_Dataset.csv</code>). The dataset contains <span class="math-inline">210</span> wheat seed samples with <span class="math-inline">7</span> numerical features (Area, Perimeter, Compactness, Length of Kernel, Width of Kernel, Asymmetry Coefficient, Length of Kernel Groove) and a class label identifying the seed variety (<span class="math-inline">1, 2, or 3</span>).</p>
           <p><strong>Step 3:</strong> Perform Exploratory Data Analysis:</p>
           <ul>
           <li>Use <code>head()</code>, <code>info()</code>, <code>describe()</code>, and <code>isnull().sum()</code> to inspect the data.</li>
@@ -421,7 +430,7 @@
           <li><strong>Features (X):</strong> Area, Perimeter, Compactness, Length of Kernel, Width of Kernel, Asymmetry Coefficient, Length of Kernel Groove.</li>
           <li><strong>Target (Y):</strong> Class (1, 2, or 3).</li>
           </ul>
-          <p><strong>Step 5:</strong> Split the dataset into 80% Training Set and 20% Testing Set using <code>train_test_split()</code> with stratified sampling to preserve class proportions.</p>
+          <p><strong>Step 5:</strong> Split the dataset into <span class="math-inline">80%</span> Training Set and <span class="math-inline">20%</span> Testing Set using <code>train_test_split()</code> with stratified sampling to preserve class proportions.</p>
           <p><strong>Step 6:</strong> Train a Single Decision Tree as Baseline:</p>
           <ul>
           <li>Initialize a <code>DecisionTreeClassifier</code> with <code>criterion='gini'</code>.</li>
@@ -429,14 +438,14 @@
           </ul>
           <p><strong>Step 7:</strong> Train a Random Forest Classifier:</p>
           <ul>
-          <li>Initialize <code>RandomForestClassifier</code> with <code>n_estimators=150</code>, <code>criterion='gini'</code>, and <code>random_state=42</code>.</li>
+          <li>Initialize <code>RandomForestClassifier</code> with <span class="math-inline">n_estimators = 150</span>, <span class="math-inline">criterion = 'gini'</span>, and <span class="math-inline">random_state = 42</span>.</li>
           <li>Fit on the training data, record test accuracy, and compare with the Decision Tree baseline.</li>
           </ul>
           <p><strong>Step 8:</strong> Hyperparameter Exploration:</p>
           <ul>
-          <li><strong>Vary <code>n_estimators</code></strong> (e.g., 10, 50, 100, 150, 300): Plot accuracy vs. number of trees.</li>
-          <li><strong>Vary <code>max_depth</code></strong> (e.g., 3, 5, 10, None): Observe the impact on multi-class performance.</li>
-          <li><strong>Vary <code>criterion</code></strong> ('gini' vs. 'entropy'): Compare the two splitting strategies and note any differences in accuracy or tree structure.</li>
+          <li><strong>Vary <code>n_estimators</code></strong> (e.g., <span class="math-inline">10, 50, 100, 150, 300</span>): Plot accuracy vs. number of trees.</li>
+          <li><strong>Vary <code>max_depth</code></strong> (e.g., <span class="math-inline">3, 5, 10, None</span>): Observe the impact on multi-class performance.</li>
+          <li><strong>Vary <code>criterion</code></strong> (<span class="math-inline">'gini' vs. 'entropy'</span>): Compare the two splitting strategies and note any differences in accuracy or tree structure.</li>
           </ul>
           <p><strong>Step 9:</strong> OOB Score Analysis:</p>
           <ul>
