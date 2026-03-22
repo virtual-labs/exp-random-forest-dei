@@ -1330,6 +1330,24 @@ const RF_ANIMATOR = {
         const update = () => {
             canvas.style.transform = `translate(${this.state.viewState.x}px, ${this.state.viewState.y}px) scale(${this.state.viewState.scale})`;
         };
+
+        const zoomAtPoint = (clientX, clientY, targetScale) => {
+            const rect = view.getBoundingClientRect();
+            const mouseX = clientX - rect.left;
+            const mouseY = clientY - rect.top;
+            const currentScale = this.state.viewState.scale;
+            const nextScale = Math.min(Math.max(0.2, targetScale), 4);
+
+            if (nextScale === currentScale) return;
+
+            const contentX = (mouseX - this.state.viewState.x) / currentScale;
+            const contentY = (mouseY - this.state.viewState.y) / currentScale;
+
+            this.state.viewState.scale = nextScale;
+            this.state.viewState.x = mouseX - contentX * nextScale;
+            this.state.viewState.y = mouseY - contentY * nextScale;
+            update();
+        };
         
         // Add existing popup container or create new one
         let popupContainer = document.getElementById('rfNodePopup');
@@ -1405,9 +1423,8 @@ const RF_ANIMATOR = {
         
         view.onwheel = e => {
             e.preventDefault();
-            const delta = -e.deltaY * 0.001;
-            this.state.viewState.scale = Math.min(Math.max(0.2, this.state.viewState.scale + delta), 4);
-            update();
+            const zoomFactor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+            zoomAtPoint(e.clientX, e.clientY, this.state.viewState.scale * zoomFactor);
             
             // Hide popup on zoom
             popupContainer.style.display = 'none';
@@ -1416,12 +1433,24 @@ const RF_ANIMATOR = {
         
         // Control buttons
         document.getElementById('rfZoomIn').onclick = () => {
-            this.state.viewState.scale = Math.min(this.state.viewState.scale + 0.2, 4);
-            update();
+            const rect = view.getBoundingClientRect();
+            zoomAtPoint(
+                rect.left + rect.width / 2,
+                rect.top + rect.height / 2,
+                this.state.viewState.scale * 1.2
+            );
+            popupContainer.style.display = 'none';
+            this.state.activeNodePopup = null;
         };
         document.getElementById('rfZoomOut').onclick = () => {
-            this.state.viewState.scale = Math.max(this.state.viewState.scale - 0.2, 0.2);
-            update();
+            const rect = view.getBoundingClientRect();
+            zoomAtPoint(
+                rect.left + rect.width / 2,
+                rect.top + rect.height / 2,
+                this.state.viewState.scale / 1.2
+            );
+            popupContainer.style.display = 'none';
+            this.state.activeNodePopup = null;
         };
     },
 
@@ -1478,16 +1507,6 @@ const RF_ANIMATOR = {
         const nodeRect = clickedNode.getBoundingClientRect();
         const viewRect = document.getElementById('rfVisualTreeView').getBoundingClientRect();
         
-        // Position popup centered below the node
-        const popupWidth = 160;
-        const x = nodeRect.left + nodeRect.width / 2 - viewRect.left - (popupWidth / 2);
-        const y = nodeRect.bottom - viewRect.top + 12; // 12px gap below node
-        
-        popupContainer.style.display = 'block';
-        popupContainer.style.left = `${x}px`;
-        popupContainer.style.top = `${y}px`;
-        popupContainer.style.width = `${popupWidth}px`;
-        
         if (isLeaf) {
             popupContainer.innerHTML = `
                 <div class="rf-popup-arrow"></div>
@@ -1513,6 +1532,39 @@ const RF_ANIMATOR = {
                     <div class="rf-popup-impurity">Impurity: ${node.impurity.toFixed(3)}</div>
                 </div>
             `;
+        }
+
+        popupContainer.style.display = 'block';
+        popupContainer.style.width = 'max-content';
+        popupContainer.style.maxWidth = `${Math.max(220, viewRect.width - 24)}px`;
+
+        const popupRect = popupContainer.getBoundingClientRect();
+        const margin = 12;
+        let x = nodeRect.left + nodeRect.width / 2 - viewRect.left - (popupRect.width / 2);
+        let y = nodeRect.bottom - viewRect.top + 12;
+
+        x = Math.min(Math.max(margin, x), viewRect.width - popupRect.width - margin);
+
+        if (y + popupRect.height + margin > viewRect.height) {
+            y = nodeRect.top - viewRect.top - popupRect.height - 12;
+            popupContainer.classList.add('rf-popup-above');
+        } else {
+            popupContainer.classList.remove('rf-popup-above');
+        }
+
+        y = Math.min(Math.max(margin, y), viewRect.height - popupRect.height - margin);
+
+        popupContainer.style.left = `${x}px`;
+        popupContainer.style.top = `${y}px`;
+
+        const arrow = popupContainer.querySelector('.rf-popup-arrow');
+        if (arrow) {
+            const nodeCenterX = nodeRect.left + nodeRect.width / 2 - viewRect.left;
+            const arrowLeft = Math.min(
+                Math.max(16, nodeCenterX - x),
+                popupRect.width - 16
+            );
+            arrow.style.left = `${arrowLeft}px`;
         }
     }
 
