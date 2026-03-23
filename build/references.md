@@ -6,6 +6,6 @@
 
 3. Louppe, G. (2014). *Understanding Random Forests: From Theory to Practice*.
 
-4. Scikit-learn Developers. *Ensemble methods - Forest of randomized trees*. https://scikit-learn.org/stable/modules/ensemble.html#forest
+4. Scikit-learn Developers. *Ensemble methods - Forest of randomized trees*.   [🔗](https://scikit-learn.org/stable/modules/ensemble.html#forest)
 
-5. Analytics Vidhya. *Random Forest Algorithm tutorials*. https://www.analyticsvidhya.com/blog/tag/random-forest/
+5. Analytics Vidhya. *Random Forest Algorithm tutorials*. [🔗](https://www.analyticsvidhya.com/blog/tag/random-forest/)
