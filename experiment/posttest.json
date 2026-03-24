@@ -49,7 +49,7 @@
         "c": "Random Forest slightly reduces bias and significantly reduces variance.",
         "d": "Random Forest slightly reduces bias and significantly reduces variance."
       },
-      "correctAnswer": "b",
+      "correctAnswer": "c",
       "difficulty": "intermediate"
     },
     {
