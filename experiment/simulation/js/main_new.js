@@ -337,7 +337,7 @@ function showAnimationEntry() {
                 You have successfully trained the Decision Tree model.
             </p>
             <button id="enterAnimationBtn" class="animation-entry-btn">
-                Enter Interactive Animation
+                Launch Interactive Animation
             </button>
         </div>
     `;
