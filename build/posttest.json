@@ -46,7 +46,7 @@
       "explanations": {
         "a": "Random Forest slightly reduces bias and significantly reduces variance.",
         "b": "Random Forest slightly reduces bias and significantly reduces variance.",
-        "c": "Random Forest slightly reduces bias and significantly reduces variance.",
+        "c": "Random Forest significantly reduces variance by averaging many trees, while typically causing a slight increase in bias because individual trees are constrained by random feature subsets.",
         "d": "Random Forest slightly reduces bias and significantly reduces variance."
       },
       "correctAnswer": "c",
