@@ -536,14 +536,14 @@
                 </div>
           
                 <div class="question intermediate">
-                  How does Random Forest handle noisy data compared to a single Decision Tree?
+                  Which output aggregation method is used in Random Forest regression?
                 </div>
           
                 <div class="answers">
                   <div id="answer4a">
                     <label>
                       <input type="radio" name="question4" value="a">
-                      a: It amplifies noise
+                      a: Majority voting
                     </label>
                     <a href="#" id="explanation4a" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -551,7 +551,7 @@
                   <div id="answer4b">
                     <label>
                       <input type="radio" name="question4" value="b">
-                      b: It ignores noise completely
+                      b: Median value
                     </label>
                     <a href="#" id="explanation4b" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -559,7 +559,7 @@
                   <div id="answer4c">
                     <label>
                       <input type="radio" name="question4" value="c">
-                      c: It is more robust to noise
+                      c: Mean of predictions
                     </label>
                     <a href="#" id="explanation4c" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -567,126 +567,9 @@
                   <div id="answer4d">
                     <label>
                       <input type="radio" name="question4" value="d">
-                      d: It removes noisy features automatically
-                    </label>
-                    <a href="#" id="explanation4d" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                </div>
-          
-                <div class="question intermediate">
-                  Which output aggregation method is used in Random Forest regression?
-                </div>
-          
-                <div class="answers">
-                  <div id="answer5a">
-                    <label>
-                      <input type="radio" name="question5" value="a">
-                      a: Majority voting
-                    </label>
-                    <a href="#" id="explanation5a" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer5b">
-                    <label>
-                      <input type="radio" name="question5" value="b">
-                      b: Median value
-                    </label>
-                    <a href="#" id="explanation5b" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer5c">
-                    <label>
-                      <input type="radio" name="question5" value="c">
-                      c: Mean of predictions
-                    </label>
-                    <a href="#" id="explanation5c" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer5d">
-                    <label>
-                      <input type="radio" name="question5" value="d">
                       d: Gradient update
                     </label>
-                    <a href="#" id="explanation5d" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                </div>
-          
-                <div class="question intermediate">
-                  Why is Random Forest considered computationally expensive?
-                </div>
-          
-                <div class="answers">
-                  <div id="answer6a">
-                    <label>
-                      <input type="radio" name="question6" value="a">
-                      a: Uses backpropagation
-                    </label>
-                    <a href="#" id="explanation6a" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer6b">
-                    <label>
-                      <input type="radio" name="question6" value="b">
-                      b: Trains many Decision Trees
-                    </label>
-                    <a href="#" id="explanation6b" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer6c">
-                    <label>
-                      <input type="radio" name="question6" value="c">
-                      c: Requires feature scaling
-                    </label>
-                    <a href="#" id="explanation6c" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer6d">
-                    <label>
-                      <input type="radio" name="question6" value="d">
-                      d: Uses complex mathematical optimization
-                    </label>
-                    <a href="#" id="explanation6d" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                </div>
-          
-                <div class="question intermediate">
-                  Which scenario best suits Random Forest usage?
-                </div>
-          
-                <div class="answers">
-                  <div id="answer7a">
-                    <label>
-                      <input type="radio" name="question7" value="a">
-                      a: Very small datasets with linear patterns
-                    </label>
-                    <a href="#" id="explanation7a" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer7b">
-                    <label>
-                      <input type="radio" name="question7" value="b">
-                      b: High-dimensional data with nonlinear relationships
-                    </label>
-                    <a href="#" id="explanation7b" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer7c">
-                    <label>
-                      <input type="radio" name="question7" value="c">
-                      c: Unlabeled datasets
-                    </label>
-                    <a href="#" id="explanation7c" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer7d">
-                    <label>
-                      <input type="radio" name="question7" value="d">
-                      d: Streaming real-time learning
-                    </label>
-                    <a href="#" id="explanation7d" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation4d" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
                 </div>
@@ -696,75 +579,36 @@
                 </div>
           
                 <div class="answers">
-                  <div id="answer8a">
+                  <div id="answer5a">
                     <label>
-                      <input type="radio" name="question8" value="a">
+                      <input type="radio" name="question5" value="a">
                       a: Gradient values
                     </label>
-                    <a href="#" id="explanation8a" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation5a" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer8b">
+                  <div id="answer5b">
                     <label>
-                      <input type="radio" name="question8" value="b">
+                      <input type="radio" name="question5" value="b">
                       b: Feature importance scores
                     </label>
-                    <a href="#" id="explanation8b" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation5b" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer8c">
+                  <div id="answer5c">
                     <label>
-                      <input type="radio" name="question8" value="c">
+                      <input type="radio" name="question5" value="c">
                       c: Cluster assignments
                     </label>
-                    <a href="#" id="explanation8c" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation5c" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer8d">
+                  <div id="answer5d">
                     <label>
-                      <input type="radio" name="question8" value="d">
+                      <input type="radio" name="question5" value="d">
                       d: Reinforcement rewards
                     </label>
-                    <a href="#" id="explanation8d" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                </div>
-          
-                <div class="question intermediate">
-                  Why is Random Forest preferred over boosting in some cases?
-                </div>
-          
-                <div class="answers">
-                  <div id="answer9a">
-                    <label>
-                      <input type="radio" name="question9" value="a">
-                      a: It focuses on hard samples only
-                    </label>
-                    <a href="#" id="explanation9a" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer9b">
-                    <label>
-                      <input type="radio" name="question9" value="b">
-                      b: It is less sensitive to noise
-                    </label>
-                    <a href="#" id="explanation9b" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer9c">
-                    <label>
-                      <input type="radio" name="question9" value="c">
-                      c: It uses gradient descent
-                    </label>
-                    <a href="#" id="explanation9c" class="accordion" onclick="return false;">Explanation</a>
-                  </div>
-                  <p class="panel">Explanation</p>
-                  <div id="answer9d">
-                    <label>
-                      <input type="radio" name="question9" value="d">
-                      d: It requires fewer trees
-                    </label>
-                    <a href="#" id="explanation9d" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation5d" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
                 </div>
@@ -774,36 +618,36 @@
                 </div>
           
                 <div class="answers">
-                  <div id="answer10a">
+                  <div id="answer6a">
                     <label>
-                      <input type="radio" name="question10" value="a">
+                      <input type="radio" name="question6" value="a">
                       a: Training accuracy on bootstrap samples
                     </label>
-                    <a href="#" id="explanation10a" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation6a" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer10b">
+                  <div id="answer6b">
                     <label>
-                      <input type="radio" name="question10" value="b">
+                      <input type="radio" name="question6" value="b">
                       b: Model complexity
                     </label>
-                    <a href="#" id="explanation10b" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation6b" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer10c">
+                  <div id="answer6c">
                     <label>
-                      <input type="radio" name="question10" value="c">
+                      <input type="radio" name="question6" value="c">
                       c: Generalization performance using samples not seen by each tree
                     </label>
-                    <a href="#" id="explanation10c" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation6c" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer10d">
+                  <div id="answer6d">
                     <label>
-                      <input type="radio" name="question10" value="d">
+                      <input type="radio" name="question6" value="d">
                       d: Number of features selected at each split
                     </label>
-                    <a href="#" id="explanation10d" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation6d" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
                 </div>
@@ -813,36 +657,36 @@
                 </div>
           
                 <div class="answers">
-                  <div id="answer11a">
+                  <div id="answer7a">
                     <label>
-                      <input type="radio" name="question11" value="a">
+                      <input type="radio" name="question7" value="a">
                       a: Often improves stability/accuracy but with diminishing returns and more computation
                     </label>
-                    <a href="#" id="explanation11a" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation7a" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer11b">
+                  <div id="answer7b">
                     <label>
-                      <input type="radio" name="question11" value="b">
+                      <input type="radio" name="question7" value="b">
                       b: Always causes severe overfitting
                     </label>
-                    <a href="#" id="explanation11b" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation7b" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer11c">
+                  <div id="answer7c">
                     <label>
-                      <input type="radio" name="question11" value="c">
+                      <input type="radio" name="question7" value="c">
                       c: Reduces model size and training time
                     </label>
-                    <a href="#" id="explanation11c" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation7c" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer11d">
+                  <div id="answer7d">
                     <label>
-                      <input type="radio" name="question11" value="d">
+                      <input type="radio" name="question7" value="d">
                       d: Disables bagging
                     </label>
-                    <a href="#" id="explanation11d" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation7d" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
                 </div>
@@ -852,36 +696,36 @@
                 </div>
           
                 <div class="answers">
-                  <div id="answer12a">
+                  <div id="answer8a">
                     <label>
-                      <input type="radio" name="question12" value="a">
+                      <input type="radio" name="question8" value="a">
                       a: It can increase tree diversity and reduce correlation among trees
                     </label>
-                    <a href="#" id="explanation12a" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation8a" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer12b">
+                  <div id="answer8b">
                     <label>
-                      <input type="radio" name="question12" value="b">
+                      <input type="radio" name="question8" value="b">
                       b: It removes the need for bootstrap sampling
                     </label>
-                    <a href="#" id="explanation12b" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation8b" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer12c">
+                  <div id="answer8c">
                     <label>
-                      <input type="radio" name="question12" value="c">
+                      <input type="radio" name="question8" value="c">
                       c: It guarantees higher accuracy for every dataset
                     </label>
-                    <a href="#" id="explanation12c" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation8c" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer12d">
+                  <div id="answer8d">
                     <label>
-                      <input type="radio" name="question12" value="d">
+                      <input type="radio" name="question8" value="d">
                       d: It converts Random Forest into boosting
                     </label>
-                    <a href="#" id="explanation12d" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation8d" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
                 </div>
@@ -891,36 +735,36 @@
                 </div>
           
                 <div class="answers">
-                  <div id="answer13a">
+                  <div id="answer9a">
                     <label>
-                      <input type="radio" name="question13" value="a">
+                      <input type="radio" name="question9" value="a">
                       a: That feature contributes strongly to impurity reduction across trees
                     </label>
-                    <a href="#" id="explanation13a" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation9a" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer13b">
+                  <div id="answer9b">
                     <label>
-                      <input type="radio" name="question13" value="b">
+                      <input type="radio" name="question9" value="b">
                       b: That feature should always be removed
                     </label>
-                    <a href="#" id="explanation13b" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation9b" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer13c">
+                  <div id="answer9c">
                     <label>
-                      <input type="radio" name="question13" value="c">
+                      <input type="radio" name="question9" value="c">
                       c: That feature was never used in splits
                     </label>
-                    <a href="#" id="explanation13c" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation9c" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
-                  <div id="answer13d">
+                  <div id="answer9d">
                     <label>
-                      <input type="radio" name="question13" value="d">
+                      <input type="radio" name="question9" value="d">
                       d: That feature is categorical
                     </label>
-                    <a href="#" id="explanation13d" class="accordion" onclick="return false;">Explanation</a>
+                    <a href="#" id="explanation9d" class="accordion" onclick="return false;">Explanation</a>
                   </div>
                   <p class="panel">Explanation</p>
                 </div>
@@ -930,7 +774,7 @@
             </div>
           
             <script>
-              const myQuestions = [{"question":"Which technique is used to improve Random Forest stability?","answers":{"a":"Pruning","b":"Normalization","c":"Standardization","d":"Bagging"},"explanations":{"a":"Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability.","b":"Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability.","c":"Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability.","d":"Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability."},"correctAnswer":"d","difficulty":"intermediate"},{"question":"Which is a key practical advantage of Random Forest over a single Decision Tree?","answers":{"a":"Usually lower variance and better generalization","b":"Always easier to interpret","c":"Needs strict feature scaling","d":"Uses only one tree for prediction"},"explanations":{"a":"By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization.","b":"By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization.","c":"By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization.","d":"By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization."},"correctAnswer":"a","difficulty":"beginner"},{"question":"What happens to bias and variance in Random Forest compared to a single tree?","answers":{"a":"Bias increases, variance increases","b":"Bias decreases, variance decreases","c":"Bias increases, variance decreases","d":"Bias remains constant, variance increases"},"explanations":{"a":"Random Forest slightly reduces bias and significantly reduces variance.","b":"Random Forest slightly reduces bias and significantly reduces variance.","c":"Random Forest significantly reduces variance by averaging many trees, while typically causing a slight increase in bias because individual trees are constrained by random feature subsets.","d":"Random Forest slightly reduces bias and significantly reduces variance."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"Which Random Forest parameter controls feature randomness at each split?","answers":{"a":"n_estimators","b":"max_features","c":"min_samples_split","d":"max_depth"},"explanations":{"a":"max_features controls how many features are randomly considered at each split.","b":"max_features controls how many features are randomly considered at each split.","c":"max_features controls how many features are randomly considered at each split.","d":"max_features controls how many features are randomly considered at each split."},"correctAnswer":"b","difficulty":"intermediate"},{"question":"How does Random Forest handle noisy data compared to a single Decision Tree?","answers":{"a":"It amplifies noise","b":"It ignores noise completely","c":"It is more robust to noise","d":"It removes noisy features automatically"},"explanations":{"a":"Averaging predictions reduces the influence of noisy samples.","b":"Averaging predictions reduces the influence of noisy samples.","c":"Averaging predictions reduces the influence of noisy samples.","d":"Averaging predictions reduces the influence of noisy samples."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"Which output aggregation method is used in Random Forest regression?","answers":{"a":"Majority voting","b":"Median value","c":"Mean of predictions","d":"Gradient update"},"explanations":{"a":"Random Forest regression averages predictions from all trees.","b":"Random Forest regression averages predictions from all trees.","c":"Random Forest regression averages predictions from all trees.","d":"Random Forest regression averages predictions from all trees."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"Why is Random Forest considered computationally expensive?","answers":{"a":"Uses backpropagation","b":"Trains many Decision Trees","c":"Requires feature scaling","d":"Uses complex mathematical optimization"},"explanations":{"a":"Multiple trees increase memory and computation requirements.","b":"Multiple trees increase memory and computation requirements.","c":"Multiple trees increase memory and computation requirements.","d":"Multiple trees increase memory and computation requirements."},"correctAnswer":"b","difficulty":"intermediate"},{"question":"Which scenario best suits Random Forest usage?","answers":{"a":"Very small datasets with linear patterns","b":"High-dimensional data with nonlinear relationships","c":"Unlabeled datasets","d":"Streaming real-time learning"},"explanations":{"a":"Random Forest handles high dimensionality and nonlinearity well.","b":"Random Forest handles high dimensionality and nonlinearity well.","c":"Random Forest handles high dimensionality and nonlinearity well.","d":"Random Forest handles high dimensionality and nonlinearity well."},"correctAnswer":"b","difficulty":"intermediate"},{"question":"What information can Random Forest provide besides predictions?","answers":{"a":"Gradient values","b":"Feature importance scores","c":"Cluster assignments","d":"Reinforcement rewards"},"explanations":{"a":"Random Forest estimates feature importance based on split contributions.","b":"Random Forest estimates feature importance based on split contributions.","c":"Random Forest estimates feature importance based on split contributions.","d":"Random Forest estimates feature importance based on split contributions."},"correctAnswer":"b","difficulty":"beginner"},{"question":"Why is Random Forest preferred over boosting in some cases?","answers":{"a":"It focuses on hard samples only","b":"It is less sensitive to noise","c":"It uses gradient descent","d":"It requires fewer trees"},"explanations":{"a":"Boosting may overfit noisy data, while Random Forest is more stable.","b":"Boosting may overfit noisy data, while Random Forest is more stable.","c":"Boosting may overfit noisy data, while Random Forest is more stable.","d":"Boosting may overfit noisy data, while Random Forest is more stable."},"correctAnswer":"b","difficulty":"intermediate"},{"question":"What does the Out-of-Bag (OOB) score in Random Forest estimate?","answers":{"a":"Training accuracy on bootstrap samples","b":"Model complexity","c":"Generalization performance using samples not seen by each tree","d":"Number of features selected at each split"},"explanations":{"a":"OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate.","b":"OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate.","c":"OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate.","d":"OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"In Random Forest, increasing n_estimators from 50 to 300 usually has what effect?","answers":{"a":"Often improves stability/accuracy but with diminishing returns and more computation","b":"Always causes severe overfitting","c":"Reduces model size and training time","d":"Disables bagging"},"explanations":{"a":"More trees can improve ensemble stability and performance, but gains typically taper off while cost increases.","b":"More trees can improve ensemble stability and performance, but gains typically taper off while cost increases.","c":"More trees can improve ensemble stability and performance, but gains typically taper off while cost increases.","d":"More trees can improve ensemble stability and performance, but gains typically taper off while cost increases."},"correctAnswer":"a","difficulty":"intermediate"},{"question":"How does reducing max_features typically influence a Random Forest?","answers":{"a":"It can increase tree diversity and reduce correlation among trees","b":"It removes the need for bootstrap sampling","c":"It guarantees higher accuracy for every dataset","d":"It converts Random Forest into boosting"},"explanations":{"a":"Considering fewer features per split increases randomness, often making trees less correlated.","b":"Considering fewer features per split increases randomness, often making trees less correlated.","c":"Considering fewer features per split increases randomness, often making trees less correlated.","d":"Considering fewer features per split increases randomness, often making trees less correlated."},"correctAnswer":"a","difficulty":"intermediate"},{"question":"What does a high feature importance value indicate in a trained Random Forest?","answers":{"a":"That feature contributes strongly to impurity reduction across trees","b":"That feature should always be removed","c":"That feature was never used in splits","d":"That feature is categorical"},"explanations":{"a":"Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction).","b":"Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction).","c":"Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction).","d":"Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction)."},"correctAnswer":"a","difficulty":"intermediate"}];
+              const myQuestions = [{"question":"Which technique is used to improve Random Forest stability?","answers":{"a":"Pruning","b":"Normalization","c":"Standardization","d":"Bagging"},"explanations":{"a":"Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability.","b":"Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability.","c":"Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability.","d":"Bagging trains trees on different bootstrap samples and averages predictions, reducing variance and improving stability."},"correctAnswer":"d","difficulty":"intermediate"},{"question":"Which is a key practical advantage of Random Forest over a single Decision Tree?","answers":{"a":"Usually lower variance and better generalization","b":"Always easier to interpret","c":"Needs strict feature scaling","d":"Uses only one tree for prediction"},"explanations":{"a":"By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization.","b":"By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization.","c":"By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization.","d":"By averaging many decorrelated trees, Random Forest generally reduces variance and improves generalization."},"correctAnswer":"a","difficulty":"beginner"},{"question":"What happens to bias and variance in Random Forest compared to a single tree?","answers":{"a":"Bias increases, variance increases","b":"Bias decreases, variance decreases","c":"Bias increases, variance decreases","d":"Bias remains constant, variance increases"},"explanations":{"a":"Random Forest slightly reduces bias and significantly reduces variance.","b":"Random Forest slightly reduces bias and significantly reduces variance.","c":"Random Forest significantly reduces variance by averaging many trees, while typically causing a slight increase in bias because individual trees are constrained by random feature subsets.","d":"Random Forest slightly reduces bias and significantly reduces variance."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"Which Random Forest parameter controls feature randomness at each split?","answers":{"a":"n_estimators","b":"max_features","c":"min_samples_split","d":"max_depth"},"explanations":{"a":"max_features controls how many features are randomly considered at each split.","b":"max_features controls how many features are randomly considered at each split.","c":"max_features controls how many features are randomly considered at each split.","d":"max_features controls how many features are randomly considered at each split."},"correctAnswer":"b","difficulty":"intermediate"},{"question":"Which output aggregation method is used in Random Forest regression?","answers":{"a":"Majority voting","b":"Median value","c":"Mean of predictions","d":"Gradient update"},"explanations":{"a":"Random Forest regression averages predictions from all trees.","b":"Random Forest regression averages predictions from all trees.","c":"Random Forest regression averages predictions from all trees.","d":"Random Forest regression averages predictions from all trees."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"What information can Random Forest provide besides predictions?","answers":{"a":"Gradient values","b":"Feature importance scores","c":"Cluster assignments","d":"Reinforcement rewards"},"explanations":{"a":"Random Forest estimates feature importance based on split contributions.","b":"Random Forest estimates feature importance based on split contributions.","c":"Random Forest estimates feature importance based on split contributions.","d":"Random Forest estimates feature importance based on split contributions."},"correctAnswer":"b","difficulty":"beginner"},{"question":"What does the Out-of-Bag (OOB) score in Random Forest estimate?","answers":{"a":"Training accuracy on bootstrap samples","b":"Model complexity","c":"Generalization performance using samples not seen by each tree","d":"Number of features selected at each split"},"explanations":{"a":"OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate.","b":"OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate.","c":"OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate.","d":"OOB uses predictions from trees where a sample was not included during training, giving a built-in validation estimate."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"In Random Forest, increasing n_estimators from 50 to 300 usually has what effect?","answers":{"a":"Often improves stability/accuracy but with diminishing returns and more computation","b":"Always causes severe overfitting","c":"Reduces model size and training time","d":"Disables bagging"},"explanations":{"a":"More trees can improve ensemble stability and performance, but gains typically taper off while cost increases.","b":"More trees can improve ensemble stability and performance, but gains typically taper off while cost increases.","c":"More trees can improve ensemble stability and performance, but gains typically taper off while cost increases.","d":"More trees can improve ensemble stability and performance, but gains typically taper off while cost increases."},"correctAnswer":"a","difficulty":"intermediate"},{"question":"How does reducing max_features typically influence a Random Forest?","answers":{"a":"It can increase tree diversity and reduce correlation among trees","b":"It removes the need for bootstrap sampling","c":"It guarantees higher accuracy for every dataset","d":"It converts Random Forest into boosting"},"explanations":{"a":"Considering fewer features per split increases randomness, often making trees less correlated.","b":"Considering fewer features per split increases randomness, often making trees less correlated.","c":"Considering fewer features per split increases randomness, often making trees less correlated.","d":"Considering fewer features per split increases randomness, often making trees less correlated."},"correctAnswer":"a","difficulty":"intermediate"},{"question":"What does a high feature importance value indicate in a trained Random Forest?","answers":{"a":"That feature contributes strongly to impurity reduction across trees","b":"That feature should always be removed","c":"That feature was never used in splits","d":"That feature is categorical"},"explanations":{"a":"Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction).","b":"Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction).","c":"Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction).","d":"Feature importance reflects cumulative contribution to splitting quality (e.g., impurity reduction)."},"correctAnswer":"a","difficulty":"intermediate"}];
             </script>
             <script src="./assets/js/assessment_v2.js"></script>
           <div class="bug-report-mobile">
