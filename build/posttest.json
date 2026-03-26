@@ -70,23 +70,6 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "How does Random Forest handle noisy data compared to a single Decision Tree?",
-      "answers": {
-        "a": "It amplifies noise",
-        "b": "It ignores noise completely",
-        "c": "It is more robust to noise",
-        "d": "It removes noisy features automatically"
-      },
-      "explanations": {
-        "a": "Averaging predictions reduces the influence of noisy samples.",
-        "b": "Averaging predictions reduces the influence of noisy samples.",
-        "c": "Averaging predictions reduces the influence of noisy samples.",
-        "d": "Averaging predictions reduces the influence of noisy samples."
-      },
-      "correctAnswer": "c",
-      "difficulty": "intermediate"
-    },
-    {
       "question": "Which output aggregation method is used in Random Forest regression?",
       "answers": {
         "a": "Majority voting",
@@ -101,40 +84,6 @@
         "d": "Random Forest regression averages predictions from all trees."
       },
       "correctAnswer": "c",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "Why is Random Forest considered computationally expensive?",
-      "answers": {
-        "a": "Uses backpropagation",
-        "b": "Trains many Decision Trees",
-        "c": "Requires feature scaling",
-        "d": "Uses complex mathematical optimization"
-      },
-      "explanations": {
-        "a": "Multiple trees increase memory and computation requirements.",
-        "b": "Multiple trees increase memory and computation requirements.",
-        "c": "Multiple trees increase memory and computation requirements.",
-        "d": "Multiple trees increase memory and computation requirements."
-      },
-      "correctAnswer": "b",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "Which scenario best suits Random Forest usage?",
-      "answers": {
-        "a": "Very small datasets with linear patterns",
-        "b": "High-dimensional data with nonlinear relationships",
-        "c": "Unlabeled datasets",
-        "d": "Streaming real-time learning"
-      },
-      "explanations": {
-        "a": "Random Forest handles high dimensionality and nonlinearity well.",
-        "b": "Random Forest handles high dimensionality and nonlinearity well.",
-        "c": "Random Forest handles high dimensionality and nonlinearity well.",
-        "d": "Random Forest handles high dimensionality and nonlinearity well."
-      },
-      "correctAnswer": "b",
       "difficulty": "intermediate"
     },
     {
@@ -153,23 +102,6 @@
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
-    },
-    {
-      "question": "Why is Random Forest preferred over boosting in some cases?",
-      "answers": {
-        "a": "It focuses on hard samples only",
-        "b": "It is less sensitive to noise",
-        "c": "It uses gradient descent",
-        "d": "It requires fewer trees"
-      },
-      "explanations": {
-        "a": "Boosting may overfit noisy data, while Random Forest is more stable.",
-        "b": "Boosting may overfit noisy data, while Random Forest is more stable.",
-        "c": "Boosting may overfit noisy data, while Random Forest is more stable.",
-        "d": "Boosting may overfit noisy data, while Random Forest is more stable."
-      },
-      "correctAnswer": "b",
-      "difficulty": "intermediate"
     },
     {
       "question": "What does the Out-of-Bag (OOB) score in Random Forest estimate?",
